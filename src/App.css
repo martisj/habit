@@ -37,15 +37,16 @@
   font-size: 20px;
   display: block;
   border: 2px solid #3c5bff;
-  border-top-left-radius: 2px;
-  border-bottom-left-radius: 2px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
   font-weight: bold;
 }
+
 .Input:focus {
   outline-offset: -2px;
   outline-style: solid;
-  border-top-left-radius: 2px;
-  border-bottom-left-radius: 2px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
 }
 
 .App-logo {
@@ -56,7 +57,16 @@
 }
 
 .Habits {
-  list-style: none;
+  display: grid;
+}
+
+.Habits .Habit {
+  border-right: 2px solid #3c5bff;
+  border-bottom: 2px solid #3c5bff;
+  padding: 22px 36px;
+}
+.Habits .Habit:last-child {
+  border-bottom: 0;
 }
 
 @keyframes App-logo-breathe {

@@ -2,17 +2,14 @@ import { h } from 'preact';
 import { useState, useRef, useEffect } from 'preact/hooks';
 import dreamer from './assets/dreamer-plant.png';
 import './App.css';
+import Habits from './components/Habits';
 
 function App() {
   const [habits, setHabits] = useState([]);
   const habitInput = useRef(null);
   console.log(habits);
-  const addHabit = (e) => {
-    e.preventDefault();
-    if (habitInput.current) {
-      setHabits([...habits, habitInput.current.value]);
-      habitInput.current.value = '';
-    }
+  const addHabit = (value) => {
+    setHabits([...habits, ...value]);
   };
 
   useEffect(() => {
@@ -31,7 +28,14 @@ function App() {
           <label htmlFor="habit" style={{ marginBottom: 10 }}>
             What habit to track?
           </label>
-          <form action="" onSubmit={addHabit}>
+          <form
+            action=""
+            onSubmit={(e) => {
+              e.preventDefault();
+              addHabit(habitInput.current && [habitInput.current.value]);
+              habitInput.current.value = '';
+            }}
+          >
             <div style={{ display: 'flex' }}>
               <input
                 className="Input"
@@ -44,22 +48,31 @@ function App() {
                 type="submit"
                 style={{ justifySelf: 'flex-end' }}
                 className="Button"
-                onClick={addHabit}
+                onClick={() => {
+                  addHabit(habitInput.current && [habitInput.current.value]);
+                  habitInput.current.value = '';
+                }}
               >
                 TRACK IT!
               </button>
             </div>
           </form>
         </div>
+        <button
+          style={{ marginTop: 10 }}
+          onClick={() =>
+            addHabit([
+              'Lift some weights',
+              'get some air',
+              'run flat out for 60 seconds',
+            ])
+          }
+        >
+          Populate with dummies
+        </button>
       </header>
-      <main>
-        {habits.length > 0 && (
-          <ul className="Habits">
-            {habits.map((habit) => (
-              <li className="Habit">{habit}</li>
-            ))}
-          </ul>
-        )}
+      <main style={{ width: '90vw', margin: '30px auto' }}>
+        <Habits habits={habits} />
       </main>
     </div>
   );
