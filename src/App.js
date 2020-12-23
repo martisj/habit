@@ -1,24 +1,14 @@
 import m from 'mithril';
+import dayjs from 'dayjs';
 import { Habit } from '@models/Habit';
-import {Habits} from '@views/Habits';
+import { HabitPoint } from '@models/HabitPoint';
+import { Habits } from '@views/Habits';
 import dreamer from './assets/dreamer-plant.png';
 import './App.css';
 
-export default {
-  oninit: Habit.loadList,
+export const App = {
   view: function () {
-    // const habitInput = useRef(null);
-    // const addHabit = (value) => {
-    //   setHabits([...habits, ...value]);
-    // };
-
-    // useEffect(() => {
-    //   if (habitInput.current) {
-    //     habitInput.current.focus();
-    //   }
-    // });
-    let input = '';
-
+    console.log(HabitPoint.history);
     return m('App', [
       m('header.App-header', [
         m('img.App-logo[alt=logo]', { src: dreamer }),
@@ -44,31 +34,23 @@ export default {
               {
                 action: '',
                 onsubmit: (e) => {
-                  console.log(e);
                   e.preventDefault();
-                  // Habit.add(habitInput.current && [habitInput.current.value]);
-                  // habitInput.current.value = '';
+                  Habit.add();
+                  Habit.clear();
                 },
               },
               [
                 m('.flex', [
-                  m('input.input#habit[placeholder=Run from a ZOMBIE️ 🧟‍♂️]', {
+                  m('input.Input#habit[placeholder=Run from a ZOMBIE️ 🧟‍♂️]', {
                     style: { flex: 1 },
-                    oninput: (e) => {
-                      input = e.target.value;
-                      console.log(input);
-                    },
+                    oninput: (e) => (Habit.current = e.target.value),
+                    value: Habit.current,
+                    autofocus: 'autofocus',
                   }),
                   m(
                     'button.Button[type=submit]',
                     {
                       style: { 'justify-self': 'flex-end' },
-                      onClick: () => {
-                        addHabit(
-                          habitInput.current && [habitInput.current.value],
-                        );
-                        habitInput.current.value = '';
-                      },
                     },
                     'TRACK IT!',
                   ),
@@ -81,17 +63,20 @@ export default {
           'button',
           {
             style: { marginTop: 10 },
-            onClick: () =>
-              addHabit([
-                'Lift some weights',
-                'get some air',
-                'run flat out for 60 seconds',
-              ]),
+            onclick: () => Habit.addDummies(),
           },
           'Populate with dummies',
         ),
       ]),
       m('main.container', m(Habits)),
+      m('.container', [
+        HabitPoint.history.map((point) =>
+          m(
+            '.HabitPoint',
+            `${point.habitId} ${dayjs(point.timestamp).format('MMM D YYYY')}`,
+          ),
+        ),
+      ]),
     ]);
   },
 };
