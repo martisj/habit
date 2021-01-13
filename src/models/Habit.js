@@ -14,7 +14,7 @@ export const Habit = {
         'Lift some weights',
         'get some air',
         'run flat out for 60 seconds',
-      ].map((title) => ({ title })),
+      ].map((title, i) => ({ title, _id: 1 + Habit.list.length + i })),
     ]),
   delete: (title) => {
     const foundIndex = Habit.list.findIndex(({ title: t }) => t === title);

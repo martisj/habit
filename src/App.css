@@ -83,6 +83,17 @@
   border-bottom: 0;
 }
 
+.HabitPoint:hover {
+  color: red;
+}
+
+.Track {
+  background-color: transparent;
+  appearance: none;
+  border: none;
+  text-decoration: underline;
+}
+
 @keyframes App-logo-breathe {
   from {
     transform: scale(1);
