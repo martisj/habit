@@ -102,3 +102,9 @@
     transform: scale(1.05);
   }
 }
+
+.FutureDays {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}

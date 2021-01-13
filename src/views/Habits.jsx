@@ -7,15 +7,13 @@ export const Habits = {
   view: () =>
     Habit.list.length > 0 ? (
       <div className="Habits">
+        <FutureDays />
         {Habit.list.map(({ title, _id }) => (
           <div className="Habit">
             <button className="Track" onclick={() => HabitPoint.add(_id)}>
               🏋️‍♂️
             </button>
             <span>{title}</span>
-            <div className="hoh">
-              <FutureDays />
-            </div>
           </div>
         ))}
       </div>
