@@ -20,7 +20,10 @@ export const Habit = {
     const foundIndex = Habit.list.findIndex(({ title: t }) => t === title);
     Habit.list =
       foundIndex > -1
-        ? [...Habit.list.slice(0, index), ...Habit.list.slice(index + 1)]
+        ? [
+            ...Habit.list.slice(0, foundIndex),
+            ...Habit.list.slice(foundIndex + 1),
+          ]
         : Habit.list;
   },
 };

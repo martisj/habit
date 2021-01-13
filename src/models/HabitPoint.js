@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 // schema:
 // type HabitPoint = {
 //   history: {
@@ -15,25 +14,4 @@ export const HabitPoint = {
       { habitId, timestamp: new Date() },
     ]),
   clear: () => (HabitPoint.current = ''),
-  addDummies: () =>
-    (HabitPoint.history = [
-      ...HabitPoint.history,
-      ...[
-        'Lift some weights',
-        'get some air',
-        'run flat out for 60 seconds',
-      ].map((timestamp) => ({ timestamp })),
-    ]),
-  delete: (timestamp) => {
-    const foundIndex = HabitPoint.history.findIndex(
-      ({ timestamp: t }) => t === timestamp,
-    );
-    HabitPoint.history =
-      foundIndex > -1
-        ? [
-            ...HabitPoint.history.slice(0, index),
-            ...HabitPoint.history.slice(index + 1),
-          ]
-        : HabitPoint.history;
-  },
 };
