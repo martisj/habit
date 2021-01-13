@@ -1,4 +1,18 @@
-export const Habit = {
+type Habit = {
+  _id: number;
+  title: string;
+};
+
+export type VoidFunc = () => void;
+
+export const Habit: {
+  list: Habit[];
+  current: string;
+  add: VoidFunc;
+  clear: VoidFunc;
+  addDummies: VoidFunc;
+  delete: (title: string) => void;
+} = {
   list: [],
   current: '',
   add: () =>
