@@ -70,28 +70,8 @@
   animation: App-logo-breathe infinite 2.2s ease-in-out alternate;
 }
 
-.Habits {
-  display: grid;
-}
-
-.Habits .Habit {
-  border-right: 2px solid #3c5bff;
-  border-bottom: 2px solid #3c5bff;
-  padding: 22px 36px;
-}
-.Habits .Habit:last-child {
-  border-bottom: 0;
-}
-
 .HabitPoint:hover {
   color: red;
-}
-
-.Track {
-  background-color: transparent;
-  appearance: none;
-  border: none;
-  text-decoration: underline;
 }
 
 @keyframes App-logo-breathe {
@@ -101,10 +81,4 @@
   to {
     transform: scale(1.05);
   }
-}
-
-.FutureDays {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
 }
