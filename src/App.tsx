@@ -22,7 +22,7 @@ export const App = function () {
         >
           <form
             action=""
-            onsubmit={(e) => {
+            onsubmit={(e: Event) => {
               e.preventDefault();
               Habit.add();
               Habit.clear();
@@ -33,7 +33,9 @@ export const App = function () {
             </label>
             <div className="flex">
               <input
-                oninput={(e) => (Habit.current = e.target.value)}
+                oninput={(e: { target: HTMLInputElement }) =>
+                  (Habit.current = e.target.value)
+                }
                 style={{ flex: 1 }}
                 type="text"
                 className="Input"

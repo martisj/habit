@@ -2,5 +2,9 @@
   "extends": "@tsconfig/recommended/tsconfig.json",
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"],
-  "compilerOptions": { "jsx": "react", "jsxFactory": "m", "strict": true }
+  "compilerOptions": {
+    "jsx": "react",
+    "jsxFactory": "m",
+    "strict": true
+  }
 }
