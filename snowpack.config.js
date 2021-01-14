@@ -5,7 +5,11 @@
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
   // mount: {},
-  plugins: ['@snowpack/plugin-svelte'],
+  plugins: [
+    '@snowpack/plugin-svelte',
+    '@snowpack/plugin-webpack',
+    '@snowpack/plugin-typescript',
+  ],
   // installOptions: {},
   devOptions: { open: 'none', port: 8008 },
   // buildOptions: {},
@@ -15,7 +19,7 @@ module.exports = {
     // '@assets': './src/assets',
   },
   mount: {
-    src: '/dist/',
-    public: { url: '/', static: true, resolve: false },
+    src: '/dist',
+    public: { url: '/', static: true },
   },
 };
