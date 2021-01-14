@@ -2453,6 +2453,11 @@ minizlib@^2.1.1:
     minipass "^3.0.0"
     yallist "^4.0.0"
 
+mithril-tsx-component@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/mithril-tsx-component/-/mithril-tsx-component-3.0.1.tgz#65dde883c15d49054a0ac4f2bea69b9a6c08e141"
+  integrity sha512-H/HiupcN3zzg96nSi+UxhW+nQta2qz853ye6I6adZozeduy6tPNDqGy80MMfWWwUMdwekSps8JXGz/BJ2jJk6g==
+
 mithril@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/mithril/-/mithril-2.0.4.tgz#d125969d992b924c7185d24ff92d997e5c00116b"

@@ -1,5 +1,4 @@
 /* global module */
-
 // Snowpack Configuration File
 // See all supported options: https://www.snowpack.dev/#configuration
 
@@ -20,9 +19,9 @@ module.exports = {
   devOptions: { open: 'none', port: 8008 },
   // buildOptions: {},
   alias: {
-    '@models': './src/models',
-    '@views': './src/views',
-    '@assets': './src/assets',
+    // '@models': './src/models',
+    // '@views': './src/views',
+    // '@assets': './src/assets',
   },
   mount: {
     src: '/dist/',
