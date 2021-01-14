@@ -5,7 +5,7 @@
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
   // mount: {},
-  plugins: [['@snowpack/plugin-babel'], ['@snowpack/plugin-typescript']],
+  plugins: ['@snowpack/plugin-svelte'],
   // installOptions: {},
   devOptions: { open: 'none', port: 8008 },
   // buildOptions: {},
