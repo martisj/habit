@@ -17,6 +17,7 @@
     "@babel/core": "^7.12.10",
     "@babel/plugin-transform-react-jsx": "^7.12.12",
     "@babel/preset-env": "^7.12.11",
+    "@babel/preset-typescript": "^7.12.7",
     "@snowpack/plugin-babel": "^2.1.5",
     "@tsconfig/recommended": "^1.0.1",
     "@types/mithril": "^2.0.6",
