@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Habit } from '../models/Habit';
-  import { HabitPoint } from '../models/HabitPoint';
-  import FutureDays from './FutureDays.svelte';
+  import { Habit } from '../store/habits'
+  import { HabitPoint } from '../store/HabitPoint'
+  import FutureDays from './FutureDays.svelte'
 </script>
 
 {#if Habit.list.length > 0}

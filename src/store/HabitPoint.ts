@@ -1,4 +1,4 @@
-import { VoidFunc } from './Habit';
+import { VoidFunc } from './habitss';
 
 type HabitPoint = {
   habitId: number;
