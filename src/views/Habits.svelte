@@ -1,16 +1,16 @@
-<script lang="ts">
-  import { Habit } from '../store/habits'
-  import { HabitPoint } from '../store/HabitPoint'
-  import FutureDays from './FutureDays.svelte'
+<script>
+  import { habits } from '../store/habits';
+  import { habitPoints } from '../store/habitPoints';
+  import FutureDays from './FutureDays.svelte';
 </script>
 
-{#if Habit.list.length > 0}
+{#if $habits.length > 0}
   <div class="Habits">
     <FutureDays />
-    {#each Habit.list as { title, _id }}
+    {#each $habits as habit}
       <div class="Habit">
-        <button class="Track" on:click={() => HabitPoint.add(_id)}> 🏋️‍♂️ </button>
-        <span>{title}</span>
+        <button class="Track" on:click={() => habitPoints.add(habit._id)}> 🏋️‍♂️ </button>
+        <span>{habit.title}</span>
       </div>
     {/each}
   </div>

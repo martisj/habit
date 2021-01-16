@@ -1,27 +1,27 @@
-import { Writable, writable } from 'svelte/store';
+import { writable } from 'svelte/store'
 
-type Habit = {
-  _id: number;
-  title: string;
-};
+// type Habit = {
+//   _id: number;
+//   title: string;
+// };
 
-type Habits = {
-  subscribe: Writable<Habit[]>['subscribe'];
-  add: (title: string) => void;
-  // clear: VoidFunc;
-  reset: VoidFunc;
-  addDummies: VoidFunc;
-  // delete: (title: string) => Habit;
-};
+// type Habits = {
+//   subscribe: Writable<Habit[]>['subscribe'];
+//   add: (title: string) => void;
+//   // clear: VoidFunc;
+//   reset: VoidFunc;
+//   addDummies: VoidFunc;
+//   // delete: (title: string) => Habit;
+// };
 
-export type VoidFunc = () => void;
+// export type VoidFunc = () => void;
 
-function createHabits(): Habits {
-  const { subscribe, set, update } = writable<[]>([]);
+function createHabits() {
+  const { subscribe, set, update } = writable([])
 
   return {
     subscribe,
-    add: (title: string) =>
+    add: (title) =>
       update((habits) => [...habits, { _id: habits.length + 1, title }]),
     reset: () => set([]),
     addDummies: () =>
@@ -43,7 +43,7 @@ function createHabits(): Habits {
     //         ]
     //       : Habit.list;
     // },
-  };
+  }
 }
 
-export const habits = createHabits();
+export const habits = createHabits()

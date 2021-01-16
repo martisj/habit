@@ -1,7 +1,7 @@
-<script lang="ts">
+<script>
   import dayjs from 'dayjs';
 
-  const theFuture = (daysToShow: number) =>
+  const theFuture = (daysToShow) =>
     Array(daysToShow)
       .fill(Math.ceil(daysToShow / 2) * -1)
       .map((day, idx) =>
