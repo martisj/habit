@@ -1,5 +1,5 @@
 <script>
-  import dayjs from 'dayjs';
+  import dayjs from 'dayjs'
 
   const theFuture = (daysToShow) =>
     Array(daysToShow)
@@ -7,20 +7,31 @@
       .map((day, idx) =>
         dayjs()
           .add(idx + day, 'day')
-          .format('DD. MMM')
-      );
+          .format('DD MMM')
+          .split(' ')
+      )
 </script>
 
-<div class="FutureDays">
+<div>
   {#each theFuture(7) as day}
-    <div>{day}</div>
+    <p>
+      <span>{day[0]}</span>{day[1]}
+    </p>
   {/each}
 </div>
 
 <style>
-  .FutureDays {
-    display: flex;
+  div {
+    text-align: center;
+  }
+
+  span {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1em;
+    display: block;
     width: 100%;
-    justify-content: space-between;
+    color: var(--cSand);
+    background-color: var(--cBlack);
   }
 </style>

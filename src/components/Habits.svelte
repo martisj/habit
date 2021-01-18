@@ -1,7 +1,7 @@
 <script>
-  import { habits } from '../store/habits';
-  import { habitPoints } from '../store/habitPoints';
-  import FutureDays from './FutureDays.svelte';
+  import { habits } from '../store/habits'
+  import { habitPoints } from '../store/habitPoints'
+  import FutureDays from './FutureDays.svelte'
 </script>
 
 {#if $habits.length > 0}
@@ -9,7 +9,9 @@
     <FutureDays />
     {#each $habits as habit}
       <div class="Habit">
-        <button class="Track" on:click={() => habitPoints.add(habit._id)}> 🏋️‍♂️ </button>
+        <button class="Track" on:click={() => habitPoints.add(habit._id)}>
+          🏋️‍♂️
+        </button>
         <span>{habit.title}</span>
       </div>
     {/each}
@@ -23,12 +25,14 @@
 <style>
   .Habits {
     display: grid;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .Habit {
-    border-right: 2px solid #3c5bff;
-    border-bottom: 2px solid #3c5bff;
+    border-bottom: 1px dotted var(--cDarkSepia);
     padding: 22px 36px;
+    text-align: right;
   }
 
   .Habit:last-child {

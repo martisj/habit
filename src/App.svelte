@@ -6,7 +6,7 @@
   import HabitPoint from './components/HabitPoint.svelte'
 </script>
 
-<div class="App">
+<div>
   <AppHeader />
   <Container>
     <Habits />
@@ -17,3 +17,25 @@
     {/each}
   </Container>
 </div>
+
+<style>
+  :root {
+    --cSepia: hsl(48, 87%, 88%);
+    --cDarkSepia: hsl(48, 66%, 66%);
+    --cBlack: hsl(0, 13%, 8%);
+    --cSand: hsl(48, 87%, 91%);
+    --cTeal: hsl(187, 69%, 55%);
+    --bg-color: var(--cSepia);
+    --logo-color: var(--cTeal);
+  }
+
+  :global(body) {
+    margin: 0;
+    font-family: 'Space Mono', 'Anonymous Pro', 'IBM Plex Mono', 'Courier',
+      monospace;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--cSepia);
+    color: var(--cBlack);
+  }
+</style>
