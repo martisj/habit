@@ -1,4 +1,8 @@
 import { writable } from 'svelte/store'
+import localforage from 'localforage'
+
+const slugify = (title) =>
+  title.toLowerCase().replace(/\W/g, '').replace(/ /g, '-')
 
 // type Habit = {
 //   _id: number;
@@ -17,32 +21,47 @@ import { writable } from 'svelte/store'
 // export type VoidFunc = () => void;
 
 function createHabits() {
-  const { subscribe, set, update } = writable([])
+  const { subscribe, set, update } = writable([], async (set) => {
+    try {
+      const items = await localforage.getItem('habits')
+      set(items)
+      return () => {}
+    } catch (error) {
+      console.error('could not find habits in localstorage')
+    }
+  })
 
+  const add = (title) =>
+    update((habits) => {
+      const newHabits = [...habits, { _id: habits.length + 1, title }]
+      localforage.setItem('habits', newHabits)
+      return newHabits
+    })
   return {
     subscribe,
-    add: (title) =>
-      update((habits) => [...habits, { _id: habits.length + 1, title }]),
-    reset: () => set([]),
-    addDummies: () =>
-      update((habits) => [
-        ...habits,
-        ...[
-          'Lift some weights',
-          'get some air',
-          'run flat out for 60 seconds',
-        ].map((title, i) => ({ title, _id: 1 + habits.length + i })),
-      ]),
-    // delete: (title) => {
-    //   const foundIndex = Habit.list.findIndex(({ title: t }) => t === title);
-    //   Habit.list =
-    //     foundIndex > -1
-    //       ? [
-    //           ...Habit.list.slice(0, foundIndex),
-    //           ...Habit.list.slice(foundIndex + 1),
-    //         ]
-    //       : Habit.list;
-    // },
+    add,
+    reset: () => {
+      localforage.setItem('habits', [])
+      set([])
+    },
+    addDummies: function () {
+      return [
+        'Lift some weights',
+        'get some air',
+        'run flat out for 60 seconds',
+      ].map(add)
+    },
+    remove: (id) => {
+      update((habits) => {
+        const foundIndex = habits.findIndex(({ _id }) => _id === id)
+        const newHabits =
+          foundIndex > -1
+            ? [...habits.slice(0, foundIndex), ...habits.slice(foundIndex + 1)]
+            : habits
+        localforage.setItem('habits', newHabits)
+        return newHabits
+      })
+    },
   }
 }
 

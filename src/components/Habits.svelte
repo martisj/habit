@@ -1,52 +1,63 @@
 <script>
+  import dayjs from 'dayjs'
   import { habits } from '../store/habits'
   import { habitPoints } from '../store/habitPoints'
-  import FutureDays from './FutureDays.svelte'
+  const today = dayjs().format('DD MMM').split(' ')
 </script>
 
 {#if $habits.length > 0}
-  <div class="Habits">
-    <FutureDays />
+  <table class="habits">
+    <tr class="habit">
+      <th />
+      <th><time datetime={new Date()}>{today[0]} {today[1]}</time></th>
+    </tr>
+
     {#each $habits as habit}
-      <div class="Habit">
-        <button class="Track" on:click={() => habitPoints.add(habit._id)}>
-          🏋️‍♂️
-        </button>
-        <span>{habit.title}</span>
-      </div>
+      <tr class="habit">
+        <td class="title">{habit.title}</td>
+        <td class="today">
+          <button class="Track" on:click={() => habitPoints.add(habit._id)}>
+            &check;
+          </button>
+          <button on:click={() => habits.remove(habit._id)}>&times;</button>
+        </td>
+      </tr>
     {/each}
-  </div>
+  </table>
 {:else}
-  <div class="Empty">
-    🥵 your habit list is awfully empty, time to get cracking
-  </div>
+  <div class="empty">Your habit list is awfully empty, time to add one.</div>
 {/if}
 
 <style>
-  .Habits {
-    display: grid;
-    flex-direction: column;
-    align-items: flex-start;
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
   }
 
-  .Habit {
-    border-bottom: 1px dotted var(--cDarkSepia);
-    padding: 22px 36px;
+  td {
+    border: 1px dotted var(--cBlack);
+    padding: 9px 6px;
+  }
+
+  .today {
+    text-align: center;
+  }
+  .title {
     text-align: right;
   }
 
-  .Habit:last-child {
+  .habit:last-child {
     border-bottom: 0;
   }
 
   .Track {
     background-color: transparent;
     appearance: none;
-    border: none;
-    text-decoration: underline;
+    border: 1px solid var(--cBlack);
+    border-radius: 3px;
   }
 
-  .Empty {
+  .empty {
     text-align: center;
   }
 </style>
