@@ -1,7 +1,5 @@
 <script>
   import HabitInput from './HabitInput.svelte'
-  import AddDummies from './AddDummies.svelte'
-  import ResetHabits from './ResetHabits.svelte'
 </script>
 
 <div>
@@ -10,20 +8,18 @@
     <p>a time for everything is a place to start</p>
   </header>
   <HabitInput />
-  <AddDummies />
-  <ResetHabits />
 </div>
 
 <style>
   header {
-    display: flex;
-    align-items: center;
-    font-size: calc(6px + 1vmin);
+    margin-bottom: 7px;
+    font-size: var(--fz-small);
   }
-
   h1 {
-    font-size: 18px;
-    margin-right: 6px;
-    font-weight: normal;
+    font-size: var(--fz-h1);
+    margin: 0;
+  }
+  p {
+    margin: 0;
   }
 </style>

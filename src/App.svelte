@@ -4,24 +4,32 @@
   import AppHeader from './components/AppHeader.svelte'
   import Container from './components/Container.svelte'
   import HabitPoint from './components/HabitPoint.svelte'
+  import AddDummies from './components/AddDummies.svelte'
+  import ResetHabits from './components/ResetHabits.svelte'
   import localforage from 'localforage'
   localforage.config({
     name: 'Habid',
     description: 'Saving the world one habit at a time',
   })
   const l = localforage.getItem('habits').then(console.log)
+  let isEditing = false
 </script>
 
 <div>
   <AppHeader />
   <Container>
-    <Habits />
+    <button on:click={() => (isEditing = !isEditing)}
+      >{isEditing ? 'Done' : 'Edit'}</button
+    >
+    <Habits {isEditing} />
   </Container>
   <Container>
     {#each $habitPoints as point}
       <HabitPoint {point} />
     {/each}
   </Container>
+  <AddDummies />
+  <ResetHabits />
 </div>
 
 <style>
@@ -35,18 +43,25 @@
     --cTeal: hsl(187, 69%, 55%);
     --bg-color: var(--cSepia);
     --logo-color: var(--cTeal);
-    --font-size--small: calc((11 / 16) * 1rem);
-    --font-size--default: calc((14 16) * 1rem);
-    --font-size--large: calc((16 / 16) * 1rem);
+    --fz-small: calc((12 / 16) * 1rem);
+    --fz-default: calc((14 / 16) * 1rem);
+    --fz-large: calc((17 / 16) * 1rem);
+    --fz-h1: calc((21 / 16) * 1rem);
+    --ff-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
   :global(body) {
     margin: 0;
-    font-family: 'Hoefler Text', Iosevka, 'Courier Prime Code', 'IBM Plex Mono',
-      'Anonymous Pro', 'Space Mono', Courier, monospace;
+    font-family: var(--ff-system);
+    font-feature-settings: 'case', 'ss01', 'ss02';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: var(--cSepia);
     color: var(--cBlack);
+  }
+
+  div {
+    padding: 7px 11px;
   }
 </style>

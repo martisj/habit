@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "snowpack dev",
+    "start": "snowpack dev --polyfill-node",
     "build": "snowpack build",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "lint": "prettier --check \"src/**/*.{js,jsx}\""
@@ -8,7 +8,8 @@
   "dependencies": {
     "dayjs": "^1.10.3",
     "localforage": "^1.9.0",
-    "svelte": "^3.31.2"
+    "svelte": "^3.31.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@snowpack/plugin-svelte": "^3.5.0",

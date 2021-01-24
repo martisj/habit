@@ -1,15 +1,19 @@
 <script>
   import dayjs from 'dayjs'
+  import { habitPoints } from '../store/habitPoints'
   export let point
 </script>
 
-<div>
-  {point.habitId}
-  {dayjs(point.timestamp).format('MMM D YYYY')}
+<div on:click={() => habitPoints.undo(point._id)}>
+  {point.habitId}.
+  {point.dateSlug.join('. ')} @ {dayjs(point.timestamp).format(
+    'hh:mm on MMM D YYYY'
+  )}
 </div>
 
 <style>
   div:hover {
     color: red;
+    cursor: pointer;
   }
 </style>
