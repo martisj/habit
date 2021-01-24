@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store'
 import localforage from 'localforage'
 import { uuid } from '../utils'
+import { db } from '../constants'
 // import { VoidFunc } from './habitss';
 
 // type HabitPoint = {
@@ -20,8 +21,8 @@ import { uuid } from '../utils'
 function createHabitPoints() {
   const { subscribe, update } = writable([], async (set) => {
     try {
-      const points = await localforage.getItem('points')
-      set(points || [])
+      const history = await localforage.getItem(db.HISTORY)
+      set(history || [])
     } catch (error) {
       console.error(error)
     }
@@ -30,23 +31,28 @@ function createHabitPoints() {
   return {
     subscribe,
     add: (habitId, dateSlug) =>
-      update((points) => {
+      update((history) => {
         const newPoints = [
-          ...points,
+          ...history,
           { _id: uuid(), habitId, dateSlug, timestamp: Date.now() },
         ]
-        localforage.setItem('points', newPoints)
+        localforage.setItem(db.HISTORY, newPoints)
 
         return newPoints
       }),
-    undo: (pointId) => {
-      update((points) => {
-        const foundIndex = points.findIndex((point) => point._id === pointId)
+    undo: (historyEntryId) => {
+      update((history) => {
+        const foundIndex = history.findIndex(
+          (point) => point._id === historyEntryId
+        )
         const newPoints =
           foundIndex > -1
-            ? [...points.slice(0, foundIndex), ...points.slice(foundIndex + 1)]
-            : points
-        localforage.setItem('points', newPoints)
+            ? [
+                ...history.slice(0, foundIndex),
+                ...history.slice(foundIndex + 1),
+              ]
+            : history
+        localforage.setItem(db.HISTORY, newPoints)
         return newPoints
       })
     },

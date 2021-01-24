@@ -1,11 +1,12 @@
 import { writable } from 'svelte/store'
 import localforage from 'localforage'
 import { uuid } from '../utils'
+import { db } from '../constants'
 
 function createHabits() {
   const { subscribe, set, update } = writable([], async (set) => {
     try {
-      const items = await localforage.getItem('habits')
+      const items = await localforage.getItem(db.HABITS)
       set(items)
       return () => {}
     } catch (error) {
@@ -16,14 +17,14 @@ function createHabits() {
   const add = (title) =>
     update((habits) => {
       const newHabits = [...habits, { _id: uuid(), title }]
-      localforage.setItem('habits', newHabits)
+      localforage.setItem(db.HABITS, newHabits)
       return newHabits
     })
   return {
     subscribe,
     add,
     reset: () => {
-      localforage.setItem('habits', [])
+      localforage.setItem(db.HABITS, [])
       set([])
     },
     addDummies: function () {
@@ -40,7 +41,7 @@ function createHabits() {
           foundIndex > -1
             ? [...habits.slice(0, foundIndex), ...habits.slice(foundIndex + 1)]
             : habits
-        localforage.setItem('habits', newHabits)
+        localforage.setItem(db.HABITS, newHabits)
         return newHabits
       })
     },
