@@ -9,3 +9,18 @@ export const calculateDaysToShow = (daysToShow) =>
     .map((day, idx) => formatDdMmmArr(dayjs().add(idx + day, 'day')))
 
 export const uuid = uuidv4
+
+export const isDoneForDay = (id, day, points) => {
+  console.log(
+    '🚀 ~ file: utils.js ~ line 14 ~ isDoneForDay ~ id, day, points',
+    id,
+    day,
+    points
+  )
+  const found = points.find(({ habitId }) => habitId === id)
+  console.log(
+    '🚀 ~ file: utils.js ~ line 16 ~ isDoneForDay ~ found && isSameDay(found.dateSlug, day)',
+    found && isSameDay(found.dateSlug, day)
+  )
+  return found && isSameDay(found.dateSlug, day)
+}

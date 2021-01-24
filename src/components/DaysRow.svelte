@@ -18,14 +18,15 @@
     display: block;
   }
 
-  :global(.highlight) {
-    background-color: var(--cDarkSepia);
-  }
-
   th {
     padding: 7px 11px;
     border-bottom: 1px dotted var(--cBlack);
     border-right: 1px dotted var(--cBlack);
+    background-color: var(--cSand);
+  }
+
+  :global(.highlight) {
+    background-color: var(--cDarkSepia);
   }
 
   th:last-child {

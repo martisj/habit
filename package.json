@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "snowpack dev --polyfill-node",
+    "start": "snowpack dev",
     "build": "snowpack build",
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "lint": "prettier --check \"src/**/*.{js,jsx}\""

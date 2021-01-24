@@ -11,7 +11,6 @@
     name: 'Habid',
     description: 'Saving the world one habit at a time',
   })
-  const l = localforage.getItem('habits').then(console.log)
   let isEditing = false
 </script>
 

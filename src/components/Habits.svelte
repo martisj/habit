@@ -3,7 +3,12 @@
   import DaysRow from './DaysRow.svelte'
   import { habits } from '../store/habits'
   import { habitPoints } from '../store/habitPoints'
-  import { formatDdMmmArr, calculateDaysToShow, isSameDay } from '../utils'
+  import {
+    formatDdMmmArr,
+    calculateDaysToShow,
+    isSameDay,
+    isDoneForDay,
+  } from '../utils'
 
   export let isEditing
 
@@ -28,8 +33,15 @@
         </td>
         <td class="title">{habit.title}</td>
         {#each days as day}
-          <td class="track" class:highlight={isSameDay(day, today)}>
-            <button on:click={() => habitPoints.add(habit._id, day)}>•</button>
+          <td
+            class="track"
+            class:highlight={isSameDay(day, today)}
+            class:transparent={isDoneForDay(habit._id, day, $habitPoints)}>
+            <button
+              on:click={() => habitPoints.add(habit._id, day)}
+              disabled={isDoneForDay(habit._id, day, $habitPoints)}
+              >{isDoneForDay(habit._id, day, $habitPoints) ? '' : '•'}</button
+            >
           </td>
         {/each}
       </tr>
@@ -45,6 +57,11 @@
     border-spacing: 0;
     background-color: var(--cSand);
     font-size: var(--fz-small);
+    background-image: url('/assets/dreamer-hand-plant.png');
+  }
+
+  .transparent {
+    background-color: transparent !important;
   }
 
   .invisible {
@@ -62,6 +79,7 @@
     border-right: 1px dotted var(--cBlack);
     vertical-align: bottom;
     padding: 9px 6px;
+    background-color: var(--cSand);
   }
 
   td {
@@ -71,7 +89,9 @@
     padding: 9px 6px;
     font-family: 'Latin Modern Mono Caps', serif;
     font-size: var(--fz-default);
+    background-color: var(--cSand);
   }
+
   td:last-child {
     border-right: none;
   }
