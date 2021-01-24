@@ -22,7 +22,7 @@
     padding: 7px 11px;
     border-bottom: 1px dotted var(--cBlack);
     border-right: 1px dotted var(--cBlack);
-    background-color: var(--cSand);
+    background-color: var(--cSepia);
   }
 
   :global(.highlight) {

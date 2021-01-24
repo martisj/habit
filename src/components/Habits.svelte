@@ -33,6 +33,7 @@
         </td>
         <td class="title">{habit.title}</td>
         {#each days as day}
+          <!-- {@debug habit, day, $habitPoints} -->
           <td
             class="track"
             class:highlight={isSameDay(day, today)}
@@ -40,7 +41,7 @@
             <button
               on:click={() => habitPoints.add(habit._id, day)}
               disabled={isDoneForDay(habit._id, day, $habitPoints)}
-              >{isDoneForDay(habit._id, day, $habitPoints) ? '' : '•'}</button
+              >{isDoneForDay(habit._id, day, $habitPoints) ? 'x' : '•'}</button
             >
           </td>
         {/each}
@@ -55,7 +56,6 @@
   table {
     border-collapse: collapse;
     border-spacing: 0;
-    background-color: var(--cSand);
     font-size: var(--fz-small);
     background-image: url('/assets/dreamer-hand-plant.png');
   }
@@ -79,7 +79,7 @@
     border-right: 1px dotted var(--cBlack);
     vertical-align: bottom;
     padding: 9px 6px;
-    background-color: var(--cSand);
+    background-color: var(--cSepia);
   }
 
   td {
@@ -89,7 +89,7 @@
     padding: 9px 6px;
     font-family: 'Latin Modern Mono Caps', serif;
     font-size: var(--fz-default);
-    background-color: var(--cSand);
+    background-color: var(--cSepia);
   }
 
   td:last-child {
