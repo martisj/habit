@@ -1,46 +1,39 @@
 import { writable } from 'svelte/store'
 import localforage from 'localforage'
-import { uuid } from '../utils'
+import { uuid, drop } from '../utils'
 import { db } from '../constants'
 
+const initialValue = () => []
 function createHabits() {
-  const { subscribe, set, update } = writable([], async (set) => {
-    try {
-      const items = await localforage.getItem(db.HABITS)
-      set(items)
-      return () => {}
-    } catch (error) {
-      console.error('could not find habits in localstorage')
-    }
-  })
+  const store = writable(new Promise(initialValue))
+
+  ;(async () => {
+    const items = localforage.getItem(db.HABITS)
+    store.set(Promise.resolve(items))
+  })()
 
   const add = (title) =>
-    update((habits) => {
+    store.update((habits) => {
       const newHabits = [...habits, { _id: uuid(), title }]
-      localforage.setItem(db.HABITS, newHabits)
+      ;(async () => localforage.setItem(db.HABITS, newHabits))()
       return newHabits
     })
+
   return {
-    subscribe,
+    subscribe: store.subscribe,
     add,
     reset: () => {
       localforage.setItem(db.HABITS, [])
-      set([])
+      store.set([])
     },
-    addDummies: function () {
-      return [
-        'Lift some weights',
-        'get some air',
-        'run flat out for 60 seconds',
-      ].map(add)
-    },
+    addDummies: () =>
+      ['Lift some weights', 'Get some air', 'Run flat out for 60 seconds'].map(
+        add
+      ),
     remove: (id) => {
-      update((habits) => {
+      store.update((habits) => {
         const foundIndex = habits.findIndex(({ _id }) => _id === id)
-        const newHabits =
-          foundIndex > -1
-            ? [...habits.slice(0, foundIndex), ...habits.slice(foundIndex + 1)]
-            : habits
+        const newHabits = drop(habits, foundIndex)
         localforage.setItem(db.HABITS, newHabits)
         return newHabits
       })

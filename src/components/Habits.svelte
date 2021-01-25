@@ -2,7 +2,7 @@
   import dayjs from 'dayjs'
   import DaysRow from './DaysRow.svelte'
   import { habits } from '../store/habits'
-  import { habitPoints } from '../store/habitPoints'
+  import { history } from '../store/history'
   import {
     formatDdMmmArr,
     calculateDaysToShow,
@@ -17,40 +17,44 @@
   const days = calculateDaysToShow(daysToShow)
 </script>
 
-{#if $habits.length > 0}
-  <table>
-    <tr class="habit">
-      <th style="border: none" />
-      <th>Stick it</th>
-      <DaysRow {days} {today} />
-    </tr>
-    <tr />
-
-    {#each $habits as habit}
+{#await $habits then habits}
+  {#if habits.length > 0}
+    <table>
       <tr class="habit">
-        <td class="track invisible" class:visible={isEditing}>
-          <button on:click={() => habits.remove(habit._id)}>&times;</button>
-        </td>
-        <td class="title">{habit.title}</td>
-        {#each days as day}
-          <!-- {@debug habit, day, $habitPoints} -->
-          <td
-            class="track"
-            class:highlight={isSameDay(day, today)}
-            class:transparent={isDoneForDay(habit._id, day, $habitPoints)}>
-            <button
-              on:click={() => habitPoints.add(habit._id, day)}
-              disabled={isDoneForDay(habit._id, day, $habitPoints)}
-              >{isDoneForDay(habit._id, day, $habitPoints) ? 'x' : '•'}</button
-            >
-          </td>
-        {/each}
+        <th style="border: none" />
+        <th>Stick it</th>
+        <DaysRow {days} {today} />
       </tr>
-    {/each}
-  </table>
-{:else}
-  <div class="empty">Your habit list is awfully empty, time to add one.</div>
-{/if}
+      <tr />
+
+      {#each habits as habit}
+        <tr class="habit">
+          <td class="track invisible" class:visible={isEditing}>
+            <button on:click={() => habits.remove(habit._id)}>&times;</button>
+          </td>
+          <td class="title">{habit.title}</td>
+          {#each days as day}
+            <!-- {@debug habit, day, $habitPoints} -->
+            <td
+              class="track"
+              class:highlight={isSameDay(day, today)}
+              class:transparent={isDoneForDay(habit._id, day, $history)}>
+              <button
+                on:click={() => history.add(habit._id, day)}
+                disabled={isDoneForDay(habit._id, day, $history)}
+                >{isDoneForDay(habit._id, day, $history) ? '' : '•'}</button
+              >
+            </td>
+          {/each}
+        </tr>
+      {/each}
+    </table>
+  {:else}
+    <div class="empty">Your habit list is awfully empty, time to add one.</div>
+  {/if}
+{:catch}
+  <p>Boom!! I messed up</p>
+{/await}
 
 <style>
   table {

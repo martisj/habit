@@ -1,9 +1,7 @@
 <script>
-  import { habitPoints } from './store/habitPoints'
   import Habits from './components/Habits.svelte'
   import AppHeader from './components/AppHeader.svelte'
   import Container from './components/Container.svelte'
-  import HabitPoint from './components/HabitPoint.svelte'
   import AddDummies from './components/AddDummies.svelte'
   import ResetHabits from './components/ResetHabits.svelte'
   import localforage from 'localforage'
@@ -21,11 +19,6 @@
       >{isEditing ? 'Done' : 'Edit'}</button
     >
     <Habits {isEditing} />
-  </Container>
-  <Container>
-    {#each $habitPoints as point}
-      <HabitPoint {point} />
-    {/each}
   </Container>
   <AddDummies />
   <ResetHabits />

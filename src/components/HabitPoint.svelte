@@ -1,12 +1,12 @@
 <script>
   import dayjs from 'dayjs'
-  import { habitPoints } from '../store/habitPoints'
-  export let point
+  import { history } from '../store/history'
+  export let entry
 </script>
 
-<div on:click={() => habitPoints.undo(point._id)}>
-  {point.habitId}.
-  {point.dateSlug.join('. ')} @ {dayjs(point.timestamp).format(
+<div on:click={() => history.undo(entry._id)}>
+  {entry.habitId}.
+  {entry.dateSlug.join('. ')} @ {dayjs(entry.timestamp).format(
     'hh:mm on MMM D YYYY'
   )}
 </div>

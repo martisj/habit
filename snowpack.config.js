@@ -8,7 +8,9 @@ module.exports = {
   plugins: ['@snowpack/plugin-svelte', '@snowpack/plugin-webpack'],
   // installOptions: {},
   devOptions: { open: 'none', port: 8008 },
-  // buildOptions: {},
+  buildOptions: {
+    sourcemap: true,
+  },
   alias: {
     // '@models': './src/models',
     // '@views': './src/views',
@@ -18,4 +20,4 @@ module.exports = {
     src: '/dist',
     public: { url: '/', static: true },
   },
-};
+}
