@@ -55,5 +55,14 @@
 
   div {
     padding: 7px 11px;
+    margin: auto;
+    width: 95%;
+  }
+
+  @media screen and (min-width: 960px) {
+    div {
+      width: 62%;
+      max-width: 1200px;
+    }
   }
 </style>

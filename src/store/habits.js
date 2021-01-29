@@ -12,8 +12,8 @@ async function getLocalHabits() {
 }
 getLocalHabits()
 
-export const addHabit = async (title) =>
-  habits.update((habits) => {
+export const addHabit = (title) =>
+  habits.update(async (habits) => {
     const newHabits = [...habits, { _id: uuid(), title }]
     localforage.setItem(db.HABITS, newHabits)
     return newHabits

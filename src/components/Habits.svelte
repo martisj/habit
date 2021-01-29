@@ -14,12 +14,12 @@
 </script>
 
 <table>
-  <!-- <tr class="habit">
+  <tr class="habit">
     <th style="border: none" />
     <th>Stick it</th>
     <DaysRow {days} {today} />
-  </tr> -->
-  <!-- <tr /> -->
+  </tr>
+  <tr />
 
   {#each $habits as habit}
     <Habit {habit} {isEditing} {today} {days} />
