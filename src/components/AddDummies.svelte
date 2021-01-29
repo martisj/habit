@@ -1,8 +1,8 @@
 <script>
-  import { habits } from '../store/habits'
+  import { addDummyHabits } from '../store/habits'
 </script>
 
-<button on:click={habits.addDummies}>Populate with dummies</button>
+<button on:click={addDummyHabits}>Populate with dummies</button>
 
 <style>
   button {

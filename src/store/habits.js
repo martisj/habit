@@ -3,42 +3,37 @@ import localforage from 'localforage'
 import { uuid, drop } from '../utils'
 import { db } from '../constants'
 
-const initialValue = () => []
-function createHabits() {
-  const store = writable(new Promise(initialValue))
+export const habits = writable([])
 
-  ;(async () => {
-    const items = localforage.getItem(db.HABITS)
-    store.set(Promise.resolve(items))
-  })()
+async function getLocalHabits() {
+  const items = await localforage.getItem(db.HABITS)
+  console.log(items)
+  return habits.set(items || [])
+}
+getLocalHabits()
 
-  const add = (title) =>
-    store.update((habits) => {
-      const newHabits = [...habits, { _id: uuid(), title }]
-      ;(async () => localforage.setItem(db.HABITS, newHabits))()
-      return newHabits
-    })
+export const addHabit = async (title) =>
+  habits.update((habits) => {
+    const newHabits = [...habits, { _id: uuid(), title }]
+    localforage.setItem(db.HABITS, newHabits)
+    return newHabits
+  })
 
-  return {
-    subscribe: store.subscribe,
-    add,
-    reset: () => {
-      localforage.setItem(db.HABITS, [])
-      store.set([])
-    },
-    addDummies: () =>
-      ['Lift some weights', 'Get some air', 'Run flat out for 60 seconds'].map(
-        add
-      ),
-    remove: (id) => {
-      store.update((habits) => {
-        const foundIndex = habits.findIndex(({ _id }) => _id === id)
-        const newHabits = drop(habits, foundIndex)
-        localforage.setItem(db.HABITS, newHabits)
-        return newHabits
-      })
-    },
-  }
+export const resetHabits = async () => {
+  await localforage.setItem(db.HABITS, [])
+  habits.set([])
 }
 
-export const habits = createHabits()
+export const addDummyHabits = () =>
+  ['Lift some weights', 'Get some air', 'Run flat out for 60 seconds'].map(
+    addHabit
+  )
+
+export const removeHabit = async (id) => {
+  habits.update((habits) => {
+    const foundIndex = habits.findIndex(({ _id }) => _id === id)
+    const newHabits = drop(habits, foundIndex)
+    localforage.setItem(db.HABITS, newHabits)
+    return Promise.resolve(newHabits)
+  })
+}

@@ -1,5 +1,5 @@
 <script>
-  import { habits } from '../store/habits'
+  import { addHabit } from '../store/habits'
   let inputHabit = ''
   const clearInputHabit = () => (inputHabit = '')
 </script>
@@ -8,7 +8,7 @@
   <form
     action=""
     on:submit|preventDefault={() => {
-      habits.add(inputHabit)
+      addHabit(inputHabit)
       clearInputHabit()
     }}
   >

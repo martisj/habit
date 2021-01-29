@@ -1,14 +1,10 @@
 <script>
   import dayjs from 'dayjs'
   import DaysRow from './DaysRow.svelte'
+  import Habit from './Habit.svelte'
+  import { formatDdMmmArr, calculateDaysToShow } from '../utils'
+
   import { habits } from '../store/habits'
-  import { history } from '../store/history'
-  import {
-    formatDdMmmArr,
-    calculateDaysToShow,
-    isSameDay,
-    isDoneForDay,
-  } from '../utils'
 
   export let isEditing
 
@@ -17,44 +13,20 @@
   const days = calculateDaysToShow(daysToShow)
 </script>
 
-{#await $habits then habits}
-  {#if habits.length > 0}
-    <table>
-      <tr class="habit">
-        <th style="border: none" />
-        <th>Stick it</th>
-        <DaysRow {days} {today} />
-      </tr>
-      <tr />
+<table>
+  <!-- <tr class="habit">
+    <th style="border: none" />
+    <th>Stick it</th>
+    <DaysRow {days} {today} />
+  </tr> -->
+  <!-- <tr /> -->
 
-      {#each habits as habit}
-        <tr class="habit">
-          <td class="track invisible" class:visible={isEditing}>
-            <button on:click={() => habits.remove(habit._id)}>&times;</button>
-          </td>
-          <td class="title">{habit.title}</td>
-          {#each days as day}
-            <!-- {@debug habit, day, $habitPoints} -->
-            <td
-              class="track"
-              class:highlight={isSameDay(day, today)}
-              class:transparent={isDoneForDay(habit._id, day, $history)}>
-              <button
-                on:click={() => history.add(habit._id, day)}
-                disabled={isDoneForDay(habit._id, day, $history)}
-                >{isDoneForDay(habit._id, day, $history) ? '' : '•'}</button
-              >
-            </td>
-          {/each}
-        </tr>
-      {/each}
-    </table>
+  {#each $habits as habit}
+    <Habit {habit} {isEditing} {today} {days} />
   {:else}
     <div class="empty">Your habit list is awfully empty, time to add one.</div>
-  {/if}
-{:catch}
-  <p>Boom!! I messed up</p>
-{/await}
+  {/each}
+</table>
 
 <style>
   table {
@@ -62,18 +34,6 @@
     border-spacing: 0;
     font-size: var(--fz-small);
     background-image: url('/assets/dreamer-hand-plant.png');
-  }
-
-  .transparent {
-    background-color: transparent !important;
-  }
-
-  .invisible {
-    visibility: hidden;
-  }
-
-  .invisible.visible {
-    visibility: visible;
   }
 
   th {
@@ -84,42 +44,6 @@
     vertical-align: bottom;
     padding: 9px 6px;
     background-color: var(--cSepia);
-  }
-
-  td {
-    border: none;
-    border-bottom: 1px dotted var(--cBlack);
-    border-right: 1px dotted var(--cBlack);
-    padding: 9px 6px;
-    font-family: 'Latin Modern Mono Caps', serif;
-    font-size: var(--fz-default);
-    background-color: var(--cSepia);
-  }
-
-  td:last-child {
-    border-right: none;
-  }
-
-  .title {
-    text-align: right;
-  }
-
-  .habit:last-child {
-    border-bottom: 0;
-  }
-
-  .track button {
-    background-color: transparent;
-    appearance: none;
-    border: none;
-    width: 100%;
-    height: 20px;
-    display: inline-block;
-    cursor: pointer;
-  }
-
-  .track {
-    padding: 0;
   }
 
   .empty {
