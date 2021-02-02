@@ -1,6 +1,6 @@
 <script>
-  import { habits, removeHabit } from '../store/habits'
-  import { history } from '../store/history'
+  import { removeHabit } from '../store/habits'
+  import { history, historyAdd } from '../store/history'
   import { isSameDay, isDoneForDay } from '../utils'
   export let habit
   export let isEditing
@@ -20,7 +20,7 @@
       class:transparent={isDoneForDay(habit._id, day, $history)}
     >
       <button
-        on:click={() => history.add(habit._id, day)}
+        on:click={() => historyAdd(habit._id, day)}
         disabled={isDoneForDay(habit._id, day, $history)}
         >{isDoneForDay(habit._id, day, $history) ? '' : '•'}</button
       >
