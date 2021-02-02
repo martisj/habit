@@ -1,5 +1,5 @@
 <script>
-  import { removeHabit } from '../store/habits'
+  import { habits } from '../store/habits'
   import { history, historyAdd } from '../store/history'
   import { isSameDay, isDoneForDay } from '../utils'
   export let habit
@@ -10,7 +10,7 @@
 
 <tr class="habit">
   <td class="track invisible" class:visible={isEditing}>
-    <button on:click={() => removeHabit(habit._id)}>&times;</button>
+    <button on:click={() => habits.remove(habit._id)}>&times;</button>
   </td>
   <td class="title">{habit.title}</td>
   {#each days as day}

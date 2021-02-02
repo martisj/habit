@@ -4,42 +4,60 @@ import { uuid, drop } from '../utils'
 import { db } from '../constants'
 import { isSaving } from './isSaving'
 
-export const habits = writable([])
+const initialValue = () => []
 
-async function getLocalHabits() {
-  isSaving.set(true)
-  const data = await localforage.getItem(db.HABITS)
-  isSaving.set(false)
-  habits.set(data || [])
+function createHabitStore() {
+  const { set, update, subscribe } = writable(new Promise(initialValue))
+
+  async function getLocalHabits() {
+    isSaving.set(true)
+    const data = await localforage.getItem(db.HABITS)
+    isSaving.set(false)
+    set(data || [])
+  }
+  getLocalHabits()
+
+  const add = async (title) => {
+    update(async (oldHabits) => {
+      const newHabits = [...oldHabits, { _id: uuid(), title }]
+      isSaving.set(true)
+      await localforage.setItem(db.HABITS, newHabits)
+      isSaving.set(false)
+      return await localforage.getItem(db.HABITS)
+    })
+  }
+
+  const reset = async () => {
+    isSaving.set(true)
+    await localforage.setItem(db.HABITS, [])
+    isSaving.set(false)
+    set(await localforage.getItem(db.HABITS))
+  }
+
+  const addDummyHabits = () =>
+    ['Lift some weights', 'Get some air', 'Run flat out for 60 seconds'].map(
+      add
+    )
+
+  const remove = async (id) => {
+    update(async (oldHabits) => {
+      const foundIndex = oldHabits.findIndex(({ _id }) => _id === id)
+      const newHabits = drop(oldHabits, foundIndex)
+      isSaving.set(true)
+      await localforage.setItem(db.HABITS, newHabits)
+      isSaving.set(false)
+      return await localforage.getItem(db.HABITS)
+    })
+  }
+
+  return {
+    subscribe,
+    add,
+    reset,
+    addDummyHabits,
+    remove,
+    isSaving,
+  }
 }
-getLocalHabits()
 
-export const addHabit = async (title) => {
-  const newHabits = [...habits, { _id: uuid(), title }]
-  console.log(JSON.stringify(newHabits))
-  isSaving.set(true)
-  await localforage.setItem(db.HABITS, newHabits)
-  isSaving.set(false)
-  habits.set(newHabits)
-}
-
-export const resetHabits = async () => {
-  isSaving.set(true)
-  await localforage.setItem(db.HABITS, [])
-  isSaving.set(false)
-  habits.set([])
-}
-
-export const addDummyHabits = () =>
-  ['Lift some weights', 'Get some air', 'Run flat out for 60 seconds'].map(
-    addHabit
-  )
-
-export const removeHabit = async (id) => {
-  const foundIndex = habits.findIndex(({ _id }) => _id === id)
-  const newHabits = drop(habits, foundIndex)
-  isSaving.set(true)
-  await localforage.setItem(db.HABITS, newHabits)
-  isSaving.set(false)
-  habits.set(newHabits)
-}
+export const habits = createHabitStore()

@@ -1,8 +1,8 @@
 <script>
-  import { resetHabits } from '../store/habits'
+  import { habits } from '../store/habits'
 </script>
 
-<button on:click={resetHabits}>Reset Habits</button>
+<button on:click={habits.reset}>Reset Habits</button>
 
 <style>
   button {
