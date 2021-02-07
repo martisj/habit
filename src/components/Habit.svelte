@@ -1,6 +1,6 @@
 <script>
   import { habits } from '../store/habits'
-  import { history, historyAdd } from '../store/history'
+  import { history } from '../store/history'
   import { isSameDay, isDoneForDay } from '../utils'
   export let habit
   export let isEditing
@@ -13,19 +13,21 @@
     <button on:click={() => habits.remove(habit._id)}>&times;</button>
   </td>
   <td class="title">{habit.title}</td>
-  {#each days as day}
-    <td
-      class="track"
-      class:highlight={isSameDay(day, today)}
-      class:transparent={isDoneForDay(habit._id, day, $history)}
-    >
-      <button
-        on:click={() => historyAdd(habit._id, day)}
-        disabled={isDoneForDay(habit._id, day, $history)}
-        >{isDoneForDay(habit._id, day, $history) ? '' : '•'}</button
+  {#await $history}
+    {#each days as day}
+      <td
+        class="track"
+        class:highlight={isSameDay(day, today)}
+        class:transparent={isDoneForDay(habit._id, day, $history)}
       >
-    </td>
-  {/each}
+        <button
+          on:click={() => history.add(habit._id, day)}
+          disabled={isDoneForDay(habit._id, day, $history)}
+          >{isDoneForDay(habit._id, day, $history) ? '' : '•'}</button
+        >
+      </td>
+    {/each}
+  {/await}
 </tr>
 
 <style>

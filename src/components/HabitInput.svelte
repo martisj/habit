@@ -7,8 +7,8 @@
 <div>
   <form
     action=""
-    on:submit|preventDefault={() => {
-      $habits.add(inputHabit)
+    on:submit|preventDefault={async () => {
+      habits.add(inputHabit)
       clearInputHabit()
     }}
   >
