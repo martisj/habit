@@ -1,31 +1,29 @@
-import { writable } from 'svelte/store'
+import { writable, get } from 'svelte/store'
 import localforage from 'localforage'
 import { uuid, drop } from '../utils'
 import { db } from '../constants'
 import { isSaving } from './isSaving'
 
 function createHabitStore() {
-  const { set, update, subscribe } = writable([])
+  const store = writable(new Promise(() => {}))
 
   async function getLocalHabits() {
     isSaving.set(true)
-    const data = await localforage.getItem(db.HABITS)
+    const habits = await localforage.getItem(db.HABITS)
+    store.set(habits ? Promise.resolve(habits) : [])
     isSaving.set(false)
-    set(data || [])
   }
   getLocalHabits()
 
-  const add = (title) => {
-    update(async (oldHabits) => {
-      const habs = await oldHabits
-      const newHabits = [...habs, { _id: uuid(), title }]
-      isSaving.set(true)
-      await localforage.setItem(db.HABITS, newHabits)
-      const result = await localforage.getItem(db.HABITS)
-      console.log(result)
-      isSaving.set(false)
-      return result
-    })
+  const add = async (title) => {
+    isSaving.set(true)
+    const habs = await get(store)
+    const newHabits = [...habs, { _id: uuid(), title }]
+    await localforage.setItem(db.HABITS, newHabits)
+    const data = await localforage.getItem(db.HABITS)
+    console.log(data)
+    store.set(data)
+    isSaving.set(false)
   }
 
   const reset = async () => {
@@ -33,7 +31,7 @@ function createHabitStore() {
     await localforage.setItem(db.HABITS, [])
     const result = await localforage.getItem(db.HABITS)
     isSaving.set(false)
-    set(result)
+    store.set(result)
   }
 
   const addDummyHabits = () =>
@@ -42,7 +40,7 @@ function createHabitStore() {
     )
 
   const remove = (id) => {
-    update(async (oldHabits) => {
+    store.update(async (oldHabits) => {
       const foundIndex = oldHabits.findIndex(({ _id }) => _id === id)
       const newHabits = drop(oldHabits, foundIndex)
       isSaving.set(true)
@@ -54,7 +52,7 @@ function createHabitStore() {
   }
 
   return {
-    subscribe,
+    subscribe: store.subscribe,
     add,
     reset,
     addDummyHabits,
