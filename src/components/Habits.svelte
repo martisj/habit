@@ -31,7 +31,9 @@
     <Habit {habit} {isEditing} {today} {days} />
   {:else}
     <tr class="text-center"
-      >Your habit list is awfully empty, time to add one.</tr
+      ><td colspan={days.length + 2} class="text-xl font-bold bg-sepia py-6"
+        >😬 Your habit list is awfully empty, time to add one.</td
+      ></tr
     >
   {/each}
 </table>
