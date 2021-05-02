@@ -1,8 +1,1 @@
-<div><slot /></div>
-
-<style>
-  div {
-    width: 90vw;
-    margin: 30px auto;
-  }
-</style>
+<div class="mx-8 my-auto w-11/12"><slot /></div>

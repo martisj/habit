@@ -4,16 +4,12 @@
   export let entry
 </script>
 
-<div on:click={() => history.undo(entry._id)}>
+<div
+  class="hover:color-red-500 hover:cursor-pointer"
+  on:click={() => history.undo(entry._id)}
+>
   {entry.habitId}.
   {entry.dateSlug.join('. ')} @ {dayjs(entry.timestamp).format(
     'hh:mm on MMM D YYYY'
   )}
 </div>
-
-<style>
-  div:hover {
-    color: red;
-    cursor: pointer;
-  }
-</style>
