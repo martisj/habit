@@ -8,18 +8,23 @@
   export let days
 </script>
 
-<tr class="habit">
-  <td class="track invisible" class:visible={isEditing}>
-    <button on:click={() => habits.remove(habit._id)}>&times;</button>
+<tr class="divide-x-1 divide-y-1 divide-black">
+  <td class="bg-sepia p-0 border-0">
+    <button
+      class={isEditing ? 'visible' : 'invisible'}
+      on:click={() => habits.remove(habit._id)}>&times;</button
+    >
   </td>
-  <td class="title">{habit.title}</td>
+  <td class="bg-sepia py-3 px-1 text-right">{habit.title}</td>
   {#each days as day}
     <td
-      class="track"
+      class="p-0 {isDoneForDay(habit._id, day, $history)
+        ? 'bg-transparent'
+        : 'bg-sepia'}"
       class:highlight={isSameDay(day, today)}
-      class:transparent={isDoneForDay(habit._id, day, $history)}
     >
       <button
+        class="bg-transparent appearance-none border-0 w-full h-5 inline-block cursor-pointer"
         on:click={() => history.add(habit._id, day)}
         disabled={isDoneForDay(habit._id, day, $history)}
         >{isDoneForDay(habit._id, day, $history) ? '' : '•'}</button
@@ -27,53 +32,3 @@
     </td>
   {/each}
 </tr>
-
-<style>
-  .transparent {
-    background-color: transparent !important;
-  }
-
-  .invisible {
-    visibility: hidden;
-  }
-
-  .invisible.visible {
-    visibility: visible;
-  }
-
-  .habit:last-child {
-    border-bottom: 0;
-  }
-
-  td {
-    border: none;
-    border-bottom: 1px dotted var(--cBlack);
-    border-right: 1px dotted var(--cBlack);
-    padding: 9px 6px;
-    font-family: 'Latin Modern Mono Caps', serif;
-    font-size: var(--fz-default);
-    background-color: var(--cSepia);
-  }
-
-  td:last-child {
-    border-right: none;
-  }
-
-  .title {
-    text-align: right;
-  }
-
-  .track button {
-    background-color: transparent;
-    appearance: none;
-    border: none;
-    width: 100%;
-    height: 20px;
-    display: inline-block;
-    cursor: pointer;
-  }
-
-  .track {
-    padding: 0;
-  }
-</style>
