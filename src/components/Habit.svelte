@@ -24,7 +24,7 @@
       class:highlight={isSameDay(day, today)}
     >
       <button
-        class="bg-transparent appearance-none border-0 w-full h-5 inline-block cursor-pointer"
+        class="text-2xl bg-transparent appearance-none border-0 w-full h-5 inline-block cursor-pointer"
         on:click={() => history.add(habit._id, day)}
         disabled={isDoneForDay(habit._id, day, $history)}
         >{isDoneForDay(habit._id, day, $history) ? '' : '•'}</button
