@@ -29,7 +29,6 @@
     --cChino: hsl(41, 29%, 72%);
     --cSand: hsl(48, 87%, 91%);
     --cTeal: hsl(187, 69%, 55%);
-    --bg-color: var(--cSepia);
     --logo-color: var(--cTeal);
     --fz-small: calc((12 / 16) * 1rem);
     --fz-default: calc((14 / 16) * 1rem);
