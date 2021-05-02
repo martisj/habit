@@ -21,15 +21,11 @@
   </tr>
   <tr />
 
-  {#await $habits then habits}
-    {#each habits as habit}
-      <Habit {habit} {isEditing} {today} {days} />
-    {:else}
-      <div class="empty">
-        Your habit list is awfully empty, time to add one.
-      </div>
-    {/each}
-  {/await}
+  {#each $habits as habit}
+    <Habit {habit} {isEditing} {today} {days} />
+  {:else}
+    <div class="empty">Your habit list is awfully empty, time to add one.</div>
+  {/each}
 </table>
 
 <style>

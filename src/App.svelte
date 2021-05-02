@@ -4,13 +4,7 @@
   import Container from './components/Container.svelte'
   import AddDummies from './components/AddDummies.svelte'
   import ResetHabits from './components/ResetHabits.svelte'
-  import localforage from 'localforage'
-  import { isSaving } from './store/isSaving'
 
-  localforage.config({
-    name: 'Habid',
-    description: 'Saving the world one habit at a time',
-  })
   let isEditing = false
 </script>
 
@@ -20,9 +14,6 @@
     <button on:click={() => (isEditing = !isEditing)}
       >{isEditing ? 'Done' : 'Edit'}</button
     >
-    {#if $isSaving}
-      <h1>SAVING</h1>
-    {/if}
     <Habits {isEditing} />
   </Container>
   <AddDummies />

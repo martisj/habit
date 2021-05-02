@@ -1,8 +1,3 @@
-export const db = {
-  HISTORY: 'history',
-  HABITS: 'habits',
-}
-
 export const status = {
   COMPLETE: 'complete',
   UNDONE: 'undone',

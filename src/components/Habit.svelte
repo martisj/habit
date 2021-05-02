@@ -13,21 +13,19 @@
     <button on:click={() => habits.remove(habit._id)}>&times;</button>
   </td>
   <td class="title">{habit.title}</td>
-  {#await $history}
-    {#each days as day}
-      <td
-        class="track"
-        class:highlight={isSameDay(day, today)}
-        class:transparent={isDoneForDay(habit._id, day, $history)}
+  {#each days as day}
+    <td
+      class="track"
+      class:highlight={isSameDay(day, today)}
+      class:transparent={isDoneForDay(habit._id, day, $history)}
+    >
+      <button
+        on:click={() => history.add(habit._id, day)}
+        disabled={isDoneForDay(habit._id, day, $history)}
+        >{isDoneForDay(habit._id, day, $history) ? '' : '•'}</button
       >
-        <button
-          on:click={() => history.add(habit._id, day)}
-          disabled={isDoneForDay(habit._id, day, $history)}
-          >{isDoneForDay(habit._id, day, $history) ? '' : '•'}</button
-        >
-      </td>
-    {/each}
-  {/await}
+    </td>
+  {/each}
 </tr>
 
 <style>
