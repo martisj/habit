@@ -8,7 +8,7 @@
   let isEditing = false
 </script>
 
-<div>
+<div class="py-2 px-3 m-auto w-11/12 lg:w-8/12 lg:max-w-6xl">
   <AppHeader />
   <Container>
     <button on:click={() => (isEditing = !isEditing)}
@@ -46,18 +46,5 @@
     -moz-osx-font-smoothing: grayscale;
     background-color: var(--cSepia);
     color: var(--cBlack);
-  }
-
-  div {
-    padding: 7px 11px;
-    margin: auto;
-    width: 95%;
-  }
-
-  @media screen and (min-width: 960px) {
-    div {
-      width: 62%;
-      max-width: 1200px;
-    }
   }
 </style>
