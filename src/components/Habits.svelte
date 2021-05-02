@@ -1,8 +1,7 @@
 <script>
   import dayjs from 'dayjs'
-  import DaysRow from './DaysRow.svelte'
   import Habit from './Habit.svelte'
-  import { formatDdMmmArr, calculateDaysToShow } from '../utils'
+  import { isSameDay, formatDdMmmArr, calculateDaysToShow } from '../utils'
 
   import { habits } from '../store/habits'
 
@@ -13,40 +12,26 @@
   const days = calculateDaysToShow(daysToShow)
 </script>
 
-<table>
-  <tr class="habit">
-    <th style="border: none" />
-    <th>Stick it</th>
-    <DaysRow {days} {today} />
+<table
+  class="bg-dreamer text-sm border-collapse divide-y-reverse-1 divide-black divide-dotted"
+>
+  <tr class="bg-sepia divide-x-1 divide-black divide-dotted">
+    <th class="align-bottom text-sm py-2 px-1 border-0 text-right" />
+    <th class="align-bottom text-sm py-3 px-1 text-right">Stick it</th>
+
+    {#each days as day}
+      <th class="px-3 py-2" class:highlight={isSameDay(day, today)}>
+        <span class="block text-center font-bold text-lg">{day[0]}</span
+        >{day[1]}
+      </th>
+    {/each}
   </tr>
-  <tr />
 
   {#each $habits as habit}
     <Habit {habit} {isEditing} {today} {days} />
   {:else}
-    <div class="empty">Your habit list is awfully empty, time to add one.</div>
+    <tr class="text-center"
+      >Your habit list is awfully empty, time to add one.</tr
+    >
   {/each}
 </table>
-
-<style>
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    font-size: var(--fz-small);
-    background-image: url('/assets/dreamer-hand-plant.png');
-  }
-
-  th {
-    border: none;
-    border-bottom: 1px dotted var(--cBlack);
-    text-align: right;
-    border-right: 1px dotted var(--cBlack);
-    vertical-align: bottom;
-    padding: 9px 6px;
-    background-color: var(--cSepia);
-  }
-
-  .empty {
-    text-align: center;
-  }
-</style>
