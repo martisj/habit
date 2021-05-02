@@ -1,0 +1,18 @@
+import svelte from '@sveltejs/vite-plugin-svelte'
+import { defineConfig } from 'vite'
+import vitePluginWindicss from 'vite-plugin-windicss'
+
+export default defineConfig(({ command, mode }) => {
+  const isProduction = mode === 'production'
+  return {
+    plugins: [
+      svelte(),
+      vitePluginWindicss({
+        transformCSS: 'pre',
+      }),
+    ],
+    build: {
+      minify: isProduction,
+    },
+  }
+})
