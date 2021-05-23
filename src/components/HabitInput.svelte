@@ -2,6 +2,7 @@
   import { habits } from '../store/habits'
   let inputHabit = ''
   const clearInputHabit = () => (inputHabit = '')
+
 </script>
 
 <div>
@@ -21,7 +22,7 @@
         type="text"
         id="habit"
         placeholder="1 pushup a day keeps the doctor at bay"
-        class="flex-1 py-3 px-4 text-size-lg block bg-sepia focus:outline-none focus:ring-2 focus:ring-chino"
+        class="bg-white flex-1 py-3 px-4 text-size-lg block bg-sepia focus:outline-none focus:ring-2 focus:ring-chino"
       />
       <button
         class="bg-sand appearance-none color-black block py-3 px-4 font-bold justify-self-end"
