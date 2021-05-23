@@ -11,25 +11,27 @@
   "dependencies": {
     "dayjs": "^1.10.4",
     "uuid": "^8.3.2",
-    "windicss": "^2.5.14"
+    "windicss": "^3.0.9"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.6",
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.10",
     "@tsconfig/svelte": "^1.0.10",
-    "eslint": "^7.24.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-svelte3": "^3.1.2",
-    "prettier": "^2.2.1",
-    "rollup": "^2.45.1",
+    "@typescript-eslint/eslint-plugin": "^4.24.0",
+    "@typescript-eslint/parser": "^4.24.0",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-svelte3": "^3.2.0",
+    "prettier": "^2.3.0",
+    "rollup": "^2.49.0",
     "sanity": "^2.2.6",
-    "svelte": "^3.37.0",
-    "svelte-check": "^1.4.0",
-    "svelte-hmr": "^0.14.0",
-    "svelte-preprocess": "^4.7.0",
+    "svelte": "^3.38.2",
+    "svelte-check": "^1.5.4",
+    "svelte-hmr": "^0.14.4",
+    "svelte-preprocess": "^4.7.3",
     "tslib": "^2.2.0",
     "typescript": "^4.2.4",
-    "vite": "^2.1.5",
-    "vite-plugin-windicss": "^0.14.0"
+    "vite": "^2.3.3",
+    "vite-plugin-windicss": "^0.15.10"
   },
   "browserslist": "> 0.25%, not dead"
 }
