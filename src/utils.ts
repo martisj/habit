@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid'
 import dayjs from 'dayjs'
-import { DATE_SLUG_FORMAT, DAY_DISPLAY_FORMAT, status } from './constants'
+import { DATE_SLUG_FORMAT, DAY_DISPLAY_FORMAT, Status } from './constants'
 
 type DayNumber =
   | 1
@@ -65,7 +65,7 @@ export const isDoneForDay = (id, day, history) => {
   return (
     currentHabit &&
     currentHabit[slug] &&
-    currentHabit[slug].status === status.COMPLETE
+    currentHabit[slug].status === 'complete'
   )
 }
 

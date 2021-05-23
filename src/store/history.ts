@@ -1,23 +1,22 @@
 import { writable } from 'svelte/store'
 import { Status, DATE_SLUG_FORMAT } from '../constants'
 import dayjs from 'dayjs'
-import { drop } from '../utils'
+import { DayTuple, drop } from '../utils'
 
 const historySlug = (day: DayTuple) => dayjs(day).format(DATE_SLUG_FORMAT)
 
-export interface HistoryItem {
-  [key: string]: {
-    timestamp: Date,
-    status: Status
-  }
+type HistoryItem = {
+  timestamp: Date
+  status: Status
 }
-
-export interface History = HistoryItem[]
+export interface History {
+  [key: string]: HistoryItem
+}
 
 function createHistoryStore() {
   const { update, subscribe } = writable({} as History)
 
-  const add = (habitId: Habit._id, day: dayjs.Dayjs) => {
+  const add = (habitId: Habit._id, day: DayTuple) => {
     update((oldHistory) => {
       const newHistory = { ...oldHistory }
       newHistory[habitId] = {
