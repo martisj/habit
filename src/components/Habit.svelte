@@ -1,7 +1,9 @@
 <script lang="ts">
   import { habits } from '../store/habits'
   import { history } from '../store/history'
-  import { isSameDay, isDoneForDay, DayTuple } from '../utils'
+  import { isSameDay, isDoneForDay } from '../utils'
+  import type { DayTuple } from '../utils'
+
   export let habit: { _id: string; title: string }
   export let isEditing: boolean
   export let today: DayTuple
