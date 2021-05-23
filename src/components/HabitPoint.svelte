@@ -1,7 +1,13 @@
-<script>
+<script lang="ts">
   import dayjs from 'dayjs'
   import { history } from '../store/history'
-  export let entry
+  export let entry: {
+    _id: any
+    habitId: any
+    dateSlug: any[]
+    timestamp: dayjs.Dayjs
+  }
+
 </script>
 
 <div

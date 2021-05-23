@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import HabitInput from './HabitInput.svelte'
 
 </script>

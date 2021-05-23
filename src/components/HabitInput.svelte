@@ -1,7 +1,9 @@
-<script>
+<script lang="ts">
   import { habits } from '../store/habits'
   let inputHabit = ''
-  const clearInputHabit = () => (inputHabit = '')
+  const clearInputHabit = (): void => {
+    inputHabit = ''
+  }
 
 </script>
 

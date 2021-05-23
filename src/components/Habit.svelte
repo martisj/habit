@@ -1,11 +1,12 @@
-<script>
+<script lang="ts">
   import { habits } from '../store/habits'
   import { history } from '../store/history'
-  import { isSameDay, isDoneForDay } from '../utils'
-  export let habit
-  export let isEditing
-  export let today
-  export let days
+  import { isSameDay, isDoneForDay, DayTuple } from '../utils'
+  export let habit: { _id: string; title: string }
+  export let isEditing: boolean
+  export let today: DayTuple
+  export let days: DayTuple[]
+
 </script>
 
 <tr class="divide-x-1 divide-y-1 divide-black">

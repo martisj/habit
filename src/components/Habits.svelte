@@ -1,15 +1,16 @@
-<script>
+<script lang="ts">
   import dayjs from 'dayjs'
   import Habit from './Habit.svelte'
   import { isSameDay, formatDdMmmArr, calculateDaysToShow } from '../utils'
 
   import { habits } from '../store/habits'
 
-  export let isEditing
+  export let isEditing: boolean
 
   const daysToShow = 10
   const today = formatDdMmmArr(dayjs())
   const days = calculateDaysToShow(daysToShow)
+
 </script>
 
 <table
