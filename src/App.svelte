@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Habits from './components/Habits.svelte'
   import AppHeader from './components/AppHeader.svelte'
   import Container from './components/Container.svelte'
@@ -6,6 +6,7 @@
   import ResetHabits from './components/ResetHabits.svelte'
 
   let isEditing = false
+
 </script>
 
 <div class="py-2 px-3 m-auto w-11/12 lg:w-8/12 lg:max-w-6xl">
@@ -47,4 +48,5 @@
     background-color: var(--cSepia);
     color: var(--cBlack);
   }
+
 </style>
