@@ -12,14 +12,18 @@
 
 </script>
 
-<div class="table-row divide-x-1 divide-y-1 divide-black">
-  <div class="table-cell bg-sepia p-0 border-0">
+<div
+  class="table-row divide-x-1 divide-y-1 divide-y-reverse last:divide-y-0 divide-chino"
+>
+  <div class="table-cell bg-sepia p-0">
     <button
       class={isEditing ? 'visible' : 'invisible'}
       on:click={() => HabitStore.remove(habit._id)}>&times;</button
     >
   </div>
-  <div class="table-cell bg-sepia py-3 px-1 text-right">{habit.title}</div>
+  <div class="table-cell bg-sepia py-3 px-1 text-right">
+    {habit.title}
+  </div>
   {#each days as day}
     <div
       class="table-cell align-middle p-0 {isDoneForDay(habit._id, day, $history)

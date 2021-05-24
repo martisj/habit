@@ -13,16 +13,10 @@
 
 </script>
 
-<div
-  class="table bg-dreamer text-sm border-collapse divide-y-reverse-1 divide-black divide-dotted"
->
-  <div class="table-row bg-sepia divide-x-1 divide-black divide-dotted">
-    <div
-      class="table-cell align-bottom text-sm py-2 px-1 border-0 text-right"
-    />
-    <div class="table-cell align-bottom text-sm py-3 px-1 text-right">
-      Stick it
-    </div>
+<div class="table bg-dreamer text-sm w-full">
+  <div class="table-row bg-sepia">
+    <div class="table-cell" />
+    <div class="table-cell" />
 
     {#each days as day}
       <div class="table-cell px-3 py-2" class:highlight={isSameDay(day, today)}>

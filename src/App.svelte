@@ -5,7 +5,6 @@
 
   import Habits from './components/Habits.svelte'
   import AppHeader from './components/AppHeader.svelte'
-  import Container from './components/Container.svelte'
   import type { Habit } from './types/Habit'
 
   const sanity = sanityClient({
@@ -30,12 +29,12 @@
 
 <div class="pb-2 px-3 m-auto w-11/12 lg:w-8/12 lg:max-w-6xl">
   <AppHeader />
-  <Container>
-    <button on:click={() => (isEditing = !isEditing)}
+  <div class="mt-4">
+    <!-- <button on:click={() => (isEditing = !isEditing)}
       >{isEditing ? 'Done' : 'Edit'}</button
-    >
+    > -->
     <Habits {habits} {isEditing} />
-  </Container>
+  </div>
 </div>
 
 <style>
