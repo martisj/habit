@@ -9,6 +9,7 @@
     "validate": "svelte-check"
   },
   "dependencies": {
+    "@sanity/client": "^2.8.0",
     "dayjs": "^1.10.4",
     "uuid": "^8.3.2",
     "windicss": "^3.0.9"
