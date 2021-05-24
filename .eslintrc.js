@@ -16,6 +16,7 @@ export default {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:@asbjorn/groq/recommended',
   ],
   overrides: [
     {

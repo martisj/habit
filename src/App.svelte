@@ -1,11 +1,34 @@
 <script lang="ts">
+  import { onMount } from 'svelte'
+  import sanityClient from '@sanity/client'
+  import groq from 'groq'
+
   import Habits from './components/Habits.svelte'
   import AppHeader from './components/AppHeader.svelte'
   import Container from './components/Container.svelte'
   import AddDummies from './components/AddDummies.svelte'
   import ResetHabits from './components/ResetHabits.svelte'
+  import type { Habit } from './types/Habit'
+
+  const sanity = sanityClient({
+    apiVersion: 'v2021-03-25',
+    projectId: 'k4ho43fa',
+    dataset: 'production',
+    token:
+      'skrCjwqOk1vmzzjVhdHkaEjdr9IoBLlkOf1qY0BICw0MtIEFHBLpfq4FVJR1JnCwD4JuCJgA2sziVqCJe0vAYgk2SgkVqUAQFvWOhoKr0XFhbh9nikijXfoxskhHzth5LwbFSM2mC2YhW6uqJz90gHfx0BWyI84lk8yx5cuS82UUh5goMXPQ',
+    useCdn: false,
+  })
 
   let isEditing = false
+  let habits: Habit[] = []
+  async function fetchHabits() {
+    const query = groq`*[_type == 'habit' ] {_id, title, description }`
+    habits = await sanity.fetch(query)
+  }
+
+  onMount(fetchHabits)
+
+  console.log(habits)
 
 </script>
 

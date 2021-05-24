@@ -15,6 +15,7 @@
     "windicss": "^3.0.9"
   },
   "devDependencies": {
+    "@asbjorn/eslint-plugin-groq": "^1.0.0",
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.10",
     "@tsconfig/svelte": "^1.0.10",
     "@typescript-eslint/eslint-plugin": "^4.24.0",
@@ -22,6 +23,7 @@
     "eslint": "^7.27.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-svelte3": "^3.2.0",
+    "groq": "^2.2.6",
     "prettier": "^2.3.0",
     "rollup": "^2.49.0",
     "sanity": "^2.2.6",

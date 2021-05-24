@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@asbjorn/eslint-plugin-groq': ^1.0.0
   '@sanity/client': ^2.8.0
   '@sveltejs/vite-plugin-svelte': ^1.0.0-next.10
   '@tsconfig/svelte': ^1.0.10
@@ -10,6 +11,7 @@ specifiers:
   eslint: ^7.27.0
   eslint-config-prettier: ^8.3.0
   eslint-plugin-svelte3: ^3.2.0
+  groq: ^2.2.6
   prettier: ^2.3.0
   rollup: ^2.49.0
   sanity: ^2.2.6
@@ -31,6 +33,7 @@ dependencies:
   windicss: 3.0.9
 
 devDependencies:
+  '@asbjorn/eslint-plugin-groq': 1.0.0_groq@2.2.6
   '@sveltejs/vite-plugin-svelte': 1.0.0-next.10_eb251bd78e4f77628588aaf0d49810a2
   '@tsconfig/svelte': 1.0.10
   '@typescript-eslint/eslint-plugin': 4.24.0_793776cb10ece467d2ef6de95ba4fe34
@@ -38,6 +41,7 @@ devDependencies:
   eslint: 7.27.0
   eslint-config-prettier: 8.3.0_eslint@7.27.0
   eslint-plugin-svelte3: 3.2.0_eslint@7.27.0+svelte@3.38.2
+  groq: 2.2.6
   prettier: 2.3.0
   rollup: 2.49.0
   sanity: 2.2.6
@@ -51,6 +55,17 @@ devDependencies:
   vite-plugin-windicss: 0.15.10_vite@2.3.3
 
 packages:
+
+  /@asbjorn/eslint-plugin-groq/1.0.0_groq@2.2.6:
+    resolution: {integrity: sha512-pE55kaOLfiongtRbt0wkI49UXzBAEfZNpRytunxm1OHIeeElzP01JGcwdu/QsnxDNkaemaUCbYrgMDUU7riU0A==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      groq: ^0.142.0
+    dependencies:
+      eslint-ast-utils: 1.1.0
+      groq: 2.2.6
+      groq-js: 0.1.8
+    dev: true
 
   /@babel/code-frame/7.12.11:
     resolution: {integrity: sha512-Zt1yodBx1UcyiePMSkWnU4hPqhwq7hGi2nFL1LeA3EUl+q2LQx16MISgJ0+z7dnmgvP9QtIleuETGOiOH1RcIw==}
@@ -623,6 +638,14 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
+  /eslint-ast-utils/1.1.0:
+    resolution: {integrity: sha512-otzzTim2/1+lVrlH19EfQQJEhVJSu0zOb9ygb3iapN6UlyaDtyRq4b5U1FuW0v1lRa9Fp/GJyHkSwm6NqABgCA==}
+    engines: {node: '>=4'}
+    dependencies:
+      lodash.get: 4.4.2
+      lodash.zip: 4.2.0
+    dev: true
+
   /eslint-config-prettier/8.3.0_eslint@7.27.0:
     resolution: {integrity: sha512-BgZuLUSeKzvlL/VUjx/Yb787VQ26RU3gGjA3iiFvdsp/2bMfVIWUVP7tjxtjS0e+HP409cPlPvNkQloz8C91ew==}
     hasBin: true
@@ -949,6 +972,15 @@ packages:
       slash: 3.0.0
     dev: true
 
+  /groq-js/0.1.8:
+    resolution: {integrity: sha512-RD9uS4JN2/8UsCHrIfdqic6mYFqjC6QxyV+iSEH01PM0s/AqzmASRr1gmcCHHCGckK8m9JTfJ94EwBehrtjMNQ==}
+    dev: true
+
+  /groq/2.2.6:
+    resolution: {integrity: sha512-UJ6zTwXYqp8PRrguMbYmBuFE+G4ZYdOeTT0qS1f35iQTb0ZfrbrzDiDRYk/N4ukuioAVjkLc8b0CECr1pk1uag==}
+    engines: {node: '>=6'}
+    dev: true
+
   /has-flag/3.0.0:
     resolution: {integrity: sha1-tdRU3CGZriJWmfNGfloH87lVuv0=}
     engines: {node: '>=4'}
@@ -1126,12 +1158,20 @@ packages:
     resolution: {integrity: sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=}
     dev: true
 
+  /lodash.get/4.4.2:
+    resolution: {integrity: sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=}
+    dev: true
+
   /lodash.merge/4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
 
   /lodash.truncate/4.4.2:
     resolution: {integrity: sha1-WjUNoLERO4N+z//VgSy+WNbq4ZM=}
+    dev: true
+
+  /lodash.zip/4.2.0:
+    resolution: {integrity: sha1-7GZi5IlkCO1KtsVCo5kLcswIACA=}
     dev: true
 
   /lodash/4.17.21:
