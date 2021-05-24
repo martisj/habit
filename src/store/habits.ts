@@ -32,4 +32,4 @@ function createHabitStore() {
   }
 }
 
-export const habits = createHabitStore()
+export const HabitStore = createHabitStore()

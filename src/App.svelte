@@ -6,8 +6,6 @@
   import Habits from './components/Habits.svelte'
   import AppHeader from './components/AppHeader.svelte'
   import Container from './components/Container.svelte'
-  import AddDummies from './components/AddDummies.svelte'
-  import ResetHabits from './components/ResetHabits.svelte'
   import type { Habit } from './types/Habit'
 
   const sanity = sanityClient({
@@ -28,8 +26,6 @@
 
   onMount(fetchHabits)
 
-  console.log(habits)
-
 </script>
 
 <div class="py-2 px-3 m-auto w-11/12 lg:w-8/12 lg:max-w-6xl">
@@ -38,10 +34,8 @@
     <button on:click={() => (isEditing = !isEditing)}
       >{isEditing ? 'Done' : 'Edit'}</button
     >
-    <Habits {isEditing} />
+    <Habits {habits} {isEditing} />
   </Container>
-  <AddDummies />
-  <ResetHabits />
 </div>
 
 <style>

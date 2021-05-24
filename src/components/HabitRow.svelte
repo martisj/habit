@@ -1,10 +1,11 @@
 <script lang="ts">
-  import { habits } from '../store/habits'
+  import { HabitStore } from '../store/habits'
   import { history } from '../store/history'
+  import type { DayTuple } from '../types/DayTuple'
+  import type { Habit } from '../types/Habit'
   import { isSameDay, isDoneForDay } from '../utils'
-  import type { DayTuple } from '../utils'
 
-  export let habit: { _id: string; title: string }
+  export let habit: Habit
   export let isEditing: boolean
   export let today: DayTuple
   export let days: DayTuple[]
@@ -15,7 +16,7 @@
   <td class="bg-sepia p-0 border-0">
     <button
       class={isEditing ? 'visible' : 'invisible'}
-      on:click={() => habits.remove(habit._id)}>&times;</button
+      on:click={() => HabitStore.remove(habit._id)}>&times;</button
     >
   </td>
   <td class="bg-sepia py-3 px-1 text-right">{habit.title}</td>

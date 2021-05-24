@@ -1,11 +1,11 @@
 <script lang="ts">
   import dayjs from 'dayjs'
-  import Habit from './Habit.svelte'
+  import HabitRow from './HabitRow.svelte'
+  import type { Habit } from '../types/Habit'
   import { isSameDay, formatDdMmmArr, calculateDaysToShow } from '../utils'
 
-  import { habits } from '../store/habits'
-
   export let isEditing: boolean
+  export let habits: Habit[]
 
   const daysToShow = 10
   const today = formatDdMmmArr(dayjs())
@@ -28,8 +28,8 @@
     {/each}
   </tr>
 
-  {#each $habits as habit}
-    <Habit {habit} {isEditing} {today} {days} />
+  {#each habits as habit}
+    <HabitRow {habit} {isEditing} {today} {days} />
   {:else}
     <tr class="text-center"
       ><td colspan={days.length + 2} class="text-xl font-bold bg-sepia py-6"

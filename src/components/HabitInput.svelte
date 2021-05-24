@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { habits } from '../store/habits'
+  import { HabitStore } from '../store/habits'
   let inputHabit = ''
   const clearInputHabit = (): void => {
     inputHabit = ''
@@ -11,14 +11,14 @@
   <form
     action=""
     on:submit|preventDefault={async () => {
-      habits.add(inputHabit)
+      HabitStore.add(inputHabit)
       clearInputHabit()
     }}
   >
     <label for="habit" class="uppercase text-xs tracking-wide font-semibold"
       >add habits you want to track</label
     >
-    <div class="flex w-1/2 min-w-64 border-0 border-bottom-2 border-chino">
+    <div class="flex w-1/2sw-64 border-0 border-bottom-2 border-chino">
       <input
         bind:value={inputHabit}
         type="text"
