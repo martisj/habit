@@ -28,7 +28,7 @@
 
 </script>
 
-<div class="py-2 px-3 m-auto w-11/12 lg:w-8/12 lg:max-w-6xl">
+<div class="pb-2 px-3 m-auto w-11/12 lg:w-8/12 lg:max-w-6xl">
   <AppHeader />
   <Container>
     <button on:click={() => (isEditing = !isEditing)}
