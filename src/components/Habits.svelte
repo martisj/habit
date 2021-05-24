@@ -13,28 +13,35 @@
 
 </script>
 
-<table
-  class="bg-dreamer text-sm border-collapse divide-y-reverse-1 divide-black divide-dotted"
+<div
+  class="table bg-dreamer text-sm border-collapse divide-y-reverse-1 divide-black divide-dotted"
 >
-  <tr class="bg-sepia divide-x-1 divide-black divide-dotted">
-    <th class="align-bottom text-sm py-2 px-1 border-0 text-right" />
-    <th class="align-bottom text-sm py-3 px-1 text-right">Stick it</th>
+  <div class="table-row bg-sepia divide-x-1 divide-black divide-dotted">
+    <div
+      class="table-cell align-bottom text-sm py-2 px-1 border-0 text-right"
+    />
+    <div class="table-cell align-bottom text-sm py-3 px-1 text-right">
+      Stick it
+    </div>
 
     {#each days as day}
-      <th class="px-3 py-2" class:highlight={isSameDay(day, today)}>
+      <div class="table-cell px-3 py-2" class:highlight={isSameDay(day, today)}>
         <span class="block text-center font-bold text-lg">{day[0]}</span
         >{day[1]}
-      </th>
+      </div>
     {/each}
-  </tr>
+  </div>
 
   {#each habits as habit}
     <HabitRow {habit} {isEditing} {today} {days} />
   {:else}
-    <tr class="text-center"
-      ><td colspan={days.length + 2} class="text-xl font-bold bg-sepia py-6"
-        >😬 Your habit list is awfully empty, time to add one.</td
-      ></tr
-    >
+    <div class="table-row text-center">
+      <div
+        colspan={days.length + 2}
+        class="table-cell text-xl font-bold bg-sepia py-6"
+      >
+        😬 Your habit list is awfully empty, time to add one.
+      </div>
+    </div>
   {/each}
-</table>
+</div>

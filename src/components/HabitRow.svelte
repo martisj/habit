@@ -12,17 +12,17 @@
 
 </script>
 
-<tr class="divide-x-1 divide-y-1 divide-black">
-  <td class="bg-sepia p-0 border-0">
+<div class="table-row divide-x-1 divide-y-1 divide-black">
+  <div class="table-cell bg-sepia p-0 border-0">
     <button
       class={isEditing ? 'visible' : 'invisible'}
       on:click={() => HabitStore.remove(habit._id)}>&times;</button
     >
-  </td>
-  <td class="bg-sepia py-3 px-1 text-right">{habit.title}</td>
+  </div>
+  <div class="table-cell bg-sepia py-3 px-1 text-right">{habit.title}</div>
   {#each days as day}
-    <td
-      class="p-0 {isDoneForDay(habit._id, day, $history)
+    <div
+      class="table-cell align-middle p-0 {isDoneForDay(habit._id, day, $history)
         ? 'bg-transparent'
         : 'bg-sepia'}"
       class:highlight={isSameDay(day, today)}
@@ -33,6 +33,6 @@
         disabled={isDoneForDay(habit._id, day, $history)}
         >{isDoneForDay(habit._id, day, $history) ? '' : '•'}</button
       >
-    </td>
+    </div>
   {/each}
-</tr>
+</div>
