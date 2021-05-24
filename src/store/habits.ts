@@ -1,11 +1,6 @@
 import { writable } from 'svelte/store'
 import { uuid, drop } from '../utils'
 
-export interface Habit {
-  _id: string
-  title: string
-}
-
 function createHabitStore() {
   const store = writable([])
 

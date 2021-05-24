@@ -5,14 +5,6 @@ import { DayTuple, drop } from '../utils'
 
 const historySlug = (day: DayTuple) => dayjs(day).format(DATE_SLUG_FORMAT)
 
-type HistoryItem = {
-  timestamp: Date
-  status: Status
-}
-export interface History {
-  [key: string]: HistoryItem
-}
-
 function createHistoryStore() {
   const { update, subscribe } = writable({} as History)
 
