@@ -5,7 +5,7 @@
   import { isSameDay, formatDdMmmArr, calculateDaysToShow } from '../utils'
 
   export let isEditing: boolean
-  export let habits: Habit[]
+  export let vanes: Habit[]
 
   const daysToShow = 10
   const today = formatDdMmmArr(dayjs())
@@ -26,7 +26,7 @@
     {/each}
   </div>
 
-  {#each habits as habit}
+  {#each vanes as habit}
     <HabitRow {habit} {isEditing} {today} {days} />
   {:else}
     <div class="table-row text-center">
