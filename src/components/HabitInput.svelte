@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { fetchVanes } from '../App.svelte'
+  // import { fetchVanes } from '../App.svelte'
 
   let inputHabit = ''
   const clearInputHabit = (): void => {
@@ -16,7 +16,7 @@
       body: JSON.stringify({ title }),
     })
     if (response.ok) {
-      fetchVanes()
+      // fetchVanes()
     } else {
       throw new Error('Cannot post vane')
     }

@@ -3,7 +3,8 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "types": ["vite/client"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules/*", "__sapper__/*", "public/*"]

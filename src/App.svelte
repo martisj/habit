@@ -1,22 +1,3 @@
-<script context="module" lang="ts">
-  let vanes: Habit[] = []
-  export async function fetchVanes() {
-    const response = await fetch('http://localhost:3001/vanes', {
-      method: 'GET',
-      mode: 'cors',
-      credentials: 'include',
-    })
-    const json: JSONResponse<Habit[]> = await response.json()
-    console.log(json.vanes)
-    if (response.ok) {
-      if (json.vanes) {
-        vanes = json.vanes
-      }
-    }
-  }
-
-</script>
-
 <script lang="ts">
   import { onMount } from 'svelte'
   import Habits from './components/Habits.svelte'
@@ -25,22 +6,39 @@
   import type { JSONResponse } from './types/JSONResponse'
 
   let isEditing = false
+  let vanes: Habit[]
 
-  onMount(fetchVanes)
+  onMount(async function fetchVanes() {
+    const response = await fetch('http://localhost:3001/vanes', {
+      method: 'GET',
+      mode: 'cors',
+      credentials: 'include',
+    })
+    const json: JSONResponse<Habit[]> = await response.json()
+    if (response.ok) {
+      if (json.vanes) {
+        vanes = json.vanes
+      }
+    }
+  })
 
 </script>
 
-<div class="pb-2 px-3 m-auto w-11/12 lg:w-8/12 lg:max-w-6xl">
-  <AppHeader />
-  <div class="mt-4">
-    <!-- <button on:click={() => (isEditing = !isEditing)}
-      >{isEditing ? 'Done' : 'Edit'}</button
-    > -->
-    <Habits {vanes} {isEditing} />
+{#if vanes}
+  <div class="pb-2 px-3 m-auto w-11/12 lg:w-8/12 lg:max-w-6xl">
+    <AppHeader />
+    <div class="mt-4">
+      <button on:click={() => (isEditing = !isEditing)}
+        >{isEditing ? 'Done' : 'Edit'}</button
+      >
+      <Habits {vanes} />
+    </div>
   </div>
-</div>
+{:else}
+  <div>loading...</div>
+{/if}
 
-<style>
+<style windi:preflights:global windi:safelist:global>
   :root {
     --cSepia: hsl(48, 87%, 88%);
     --cDarkSepia: hsl(48, 66%, 66%);

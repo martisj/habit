@@ -23,4 +23,5 @@ module.exports = defineConfig({
       }),
     },
   },
+  safelist: 'col-start-2',
 })
