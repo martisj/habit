@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { HabitStore } from '../store/habits'
   import { history } from '../store/history'
   import type { DayTuple } from '../types/DayTuple'
   import type { Habit } from '../types/Habit'
@@ -18,7 +17,8 @@
   <div class="table-cell bg-sepia p-0">
     <button
       class={isEditing ? 'visible' : 'invisible'}
-      on:click={() => HabitStore.remove(habit._id)}>&times;</button
+      on:click={() => console.log('TODO: destroy endpoint', habit._id)}
+      >&times;</button
     >
   </div>
   <div class="table-cell bg-sepia py-3 px-1 text-right">

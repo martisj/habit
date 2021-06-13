@@ -1,34 +1,32 @@
-<script lang="ts">
-  import { onMount } from 'svelte'
-  import sanityClient from '@sanity/client'
-
-  import Habits from './components/Habits.svelte'
-  import AppHeader from './components/AppHeader.svelte'
-  import type { Habit } from './types/Habit'
-
-  let isEditing = false
+<script context="module" lang="ts">
   let vanes: Habit[] = []
-
-  type JSONResponse = {
-    vanes?: Habit[]
-    errors?: Array<{ message: string }>
-  }
-
-  onMount(async () => {
-    // const query = groq`*[_type == 'habit' ] {_id, title, description }`
+  export async function fetchVanes() {
     const response = await fetch('http://localhost:3001/vanes', {
       method: 'GET',
       mode: 'cors',
       credentials: 'include',
     })
-    const json: JSONResponse = await response.json()
+    const json: JSONResponse<Habit[]> = await response.json()
     console.log(json.vanes)
     if (response.ok) {
       if (json.vanes) {
         vanes = json.vanes
       }
     }
-  })
+  }
+
+</script>
+
+<script lang="ts">
+  import { onMount } from 'svelte'
+  import Habits from './components/Habits.svelte'
+  import AppHeader from './components/AppHeader.svelte'
+  import type { Habit } from './types/Habit'
+  import type { JSONResponse } from './types/JSONResponse'
+
+  let isEditing = false
+
+  onMount(fetchVanes)
 
 </script>
 

@@ -1,8 +1,25 @@
 <script lang="ts">
-  import { HabitStore } from '../store/habits'
+  import { fetchVanes } from '../App.svelte'
+
   let inputHabit = ''
   const clearInputHabit = (): void => {
     inputHabit = ''
+  }
+
+  async function postVane(title: string) {
+    console.log(JSON.stringify({ title }))
+    const response = await fetch('http://localhost:3001/vane', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json;charset=utf-8' },
+      mode: 'cors',
+      credentials: 'include',
+      body: JSON.stringify({ title }),
+    })
+    if (response.ok) {
+      fetchVanes()
+    } else {
+      throw new Error('Cannot post vane')
+    }
   }
 
 </script>
@@ -11,8 +28,13 @@
   <form
     action=""
     on:submit|preventDefault={async () => {
-      HabitStore.add(inputHabit)
-      clearInputHabit()
+      try {
+        console.log(inputHabit)
+        await postVane(inputHabit)
+        clearInputHabit()
+      } catch (error) {
+        console.error(error)
+      }
     }}
   >
     <label for="habit" class="uppercase text-xs tracking-wide font-semibold"

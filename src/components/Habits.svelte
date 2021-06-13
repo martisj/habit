@@ -10,6 +10,7 @@
   const daysToShow = 10
   const today = formatDdMmmArr(dayjs())
   const days = calculateDaysToShow(daysToShow)
+  console.log(vanes)
 
 </script>
 
