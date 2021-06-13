@@ -14,7 +14,7 @@
 
 </script>
 
-<div class="table bg-dreamer text-sm w-full">
+<div class="table bg-fractal text-sm w-full">
   <div class="table-row bg-sepia">
     <div class="table-cell" />
     <div class="table-cell" />

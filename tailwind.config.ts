@@ -19,6 +19,7 @@ module.exports = defineConfig({
       },
       backgroundImage: (theme) => ({
         dreamer: "url('/assets/dreamer-hand-plant.png')",
+        fractal: "url('/assets/fractal-alex-grey.jpg')",
       }),
     },
   },
