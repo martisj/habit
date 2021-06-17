@@ -5,20 +5,20 @@
   import { isDoneForDay } from '../utils'
 
   export let habit: Habit
-  // export let isEditing: boolean
+  export let isEditing: boolean
   export let today: DayTuple
   export let days: DayTuple[]
 
 </script>
 
-<!-- <div class="p-0">
-  <button
-    class={isEditing ? 'visible' : 'invisible'}
-    on:click={() => alert(`TODO: destroy endpoint ${habit._id}`)}
-    >&times;</button
-  >
-</div> -->
-<div class="py-3 px-1 text-right bg-sepia">
+<div class="py-3 px-1 text-right bg-sepia relative">
+  {#if isEditing}
+    <button
+      class="px-4 appearance-none absolute left-0 top-0 bottom-0 text-xl text-rose-500 font-medium leading-none"
+      on:click={() => alert(`TODO: destroy endpoint ${habit._id}`)}
+      >&times;</button
+    >
+  {/if}
   {habit.title}
 </div>
 {#each days as day}

@@ -44,17 +44,22 @@
   }
 
   let isEditing = false
+  const toggleIsEditing = () => (isEditing = !isEditing)
 
 </script>
 
 <div class="pb-2 px-3 m-auto w-11/12 lg:w-8/12 lg:max-w-6xl">
   <AppHeader {postVane} />
   <div class="mt-4">
-    <button on:click={() => (isEditing = !isEditing)}
-      >{isEditing ? 'Done' : 'Edit'}</button
-    >
+    <button
+      on:click={toggleIsEditing}
+      class="bg-orange-400 appearance-none text-orange-900 block py-1 px-2 font-bold uppercase text-xs"
+      class:bg-emerald-500={isEditing}
+      class:text-emerald-900={isEditing}
+      >{isEditing ? '✓ Done' : '✎ Edit'}
+    </button>
     {#if !isLoading}
-      <Habits {vanes} />
+      <Habits {vanes} {isEditing} />
     {:else}
       <span class="flex justify-center p-6 text-xl font-medium animate-pulse"
         >Loading&hellip;</span

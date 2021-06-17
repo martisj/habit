@@ -23,5 +23,5 @@ module.exports = defineConfig({
       }),
     },
   },
-  safelist: 'col-start-2',
+  safelist: 'col-start-2 bg-emerald-500 text-emerald-900',
 })

@@ -4,7 +4,7 @@
   import type { Habit } from '../types/Habit'
   import { isSameDay, formatDdMmmArr, calculateDaysToShow } from '../utils'
 
-  // export let isEditing: boolean
+  export let isEditing: boolean
   export let vanes: Habit[]
 
   const daysToShow = 4
@@ -26,7 +26,7 @@
   {/each}
 
   {#each vanes as habit}
-    <HabitRow {habit} {today} {days} />
+    <HabitRow {habit} {today} {days} {isEditing} />
   {:else}
     <div
       colspan={days.length + 2}
