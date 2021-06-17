@@ -2,15 +2,11 @@
   import dayjs from 'dayjs'
   import HabitRow from './HabitRow.svelte'
   import type { Habit } from '../types/Habit'
-  import {
-    isSameDay,
-    formatDdMmmArr,
-    calculateDaysToShow,
-    randomBackgroundImage,
-  } from '../utils'
+  import { isSameDay, formatDdMmmArr, calculateDaysToShow } from '../utils'
 
   export let isEditing: boolean
   export let vanes: Habit[]
+  export let destroyVane: (id: string) => void
 
   const daysToShow = 4
   const today = formatDdMmmArr(dayjs())
@@ -19,7 +15,7 @@
 
 </script>
 
-<div class={`grid grid-cols-6 text-sm ${randomBackgroundImage()}`}>
+<div class="grid grid-cols-6 text-sm bg-pixie">
   <div class="bg-sepia" />
   {#each days as day}
     <div
@@ -31,7 +27,7 @@
   {/each}
 
   {#each vanes as habit}
-    <HabitRow {habit} {today} {days} {isEditing} />
+    <HabitRow {habit} {today} {days} {isEditing} {destroyVane} />
   {:else}
     <div
       colspan={days.length + 2}

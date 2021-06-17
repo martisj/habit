@@ -27,9 +27,3 @@ export const isDoneForDay = (id: string, day: any, history: any) => {
 
 export const drop = <T>(list: T[], index: number): T[] =>
   index > -1 ? [...list.slice(0, index), ...list.slice(index + 1)] : list
-
-export function randomBackgroundImage() {
-  const imgs = ['wave', 'fractal']
-  const i = Math.floor(Math.random() * imgs.length)
-  return `bg-${imgs[i]}`
-}

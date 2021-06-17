@@ -7,6 +7,7 @@
   let isLoading = false
   type Endpoints = 'vane' | 'vanes'
   const apiUrl = (url: Endpoints) => `http://localhost:3001/${url}`
+  const destroyUrl = (id: string) => `${apiUrl('vane')}/${id}`
 
   let vanes: Habit[] = []
   async function fetchData() {
@@ -43,6 +44,21 @@
     isLoading = false
   }
 
+  async function destroyVane(id: string) {
+    isLoading = true
+    const response = await fetch(destroyUrl(id), {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json;charset=utf-8' },
+      mode: 'cors',
+      credentials: 'include',
+    })
+    if (response.ok) {
+      await fetchData()
+    } else {
+      throw new Error('Cannot post vane')
+    }
+    isLoading = false
+  }
   let isEditing = false
   const toggleIsEditing = () => (isEditing = !isEditing)
 
@@ -59,7 +75,7 @@
       >{isEditing ? '✓ Done' : '✎ Edit'}
     </button>
     {#if !isLoading}
-      <Habits {vanes} {isEditing} />
+      <Habits {vanes} {destroyVane} {isEditing} />
     {:else}
       <span class="flex justify-center p-6 text-xl font-medium animate-pulse"
         >Loading&hellip;</span

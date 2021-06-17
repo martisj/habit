@@ -8,6 +8,7 @@
   export let isEditing: boolean
   export let today: DayTuple
   export let days: DayTuple[]
+  export let destroyVane: (id: string) => void
 
 </script>
 
@@ -15,11 +16,10 @@
   {#if isEditing}
     <button
       class="px-4 appearance-none absolute left-0 top-0 bottom-0 text-xl text-rose-500 font-medium leading-none"
-      on:click={() => alert(`TODO: destroy endpoint ${habit._id}`)}
-      >&times;</button
+      on:click={() => destroyVane(habit._id)}>&times;</button
     >
   {/if}
-  {habit.title}
+  <strong>{habit.title}</strong>
 </div>
 {#each days as day}
   <div
