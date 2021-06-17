@@ -8,7 +8,7 @@
 <div>
   <header class="mb-2 text-size-sm flex items-end">
     <h1
-      class="text-size-xl bg-chino align-text-bottom pt-3 px-1 mr-2 rounded-b-sm"
+      class="text-size-xl text-orange-900 bg-orange-400 align-text-bottom pt-3 px-1 mr-2 rounded"
     >
       Vane
     </h1>
