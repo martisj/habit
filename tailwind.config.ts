@@ -18,10 +18,10 @@ module.exports = defineConfig({
         grey: 'hsl(0, 9%, 76%)',
       },
       backgroundImage: (theme) => ({
-        dreamer: "url('/assets/dreamer-hand-plant.png')",
         fractal: "url('/assets/fractal-alex-grey.jpg')",
+        pixie: "url('/assets/pixie.jpg')",
       }),
     },
   },
-  safelist: 'col-start-2 bg-emerald-500 text-emerald-900',
+  safelist: 'col-start-2 bg-emerald-500 text-emerald-900 bg-fractal bg-pixie',
 })
