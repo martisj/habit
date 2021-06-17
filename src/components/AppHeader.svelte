@@ -1,6 +1,8 @@
 <script lang="ts">
   import HabitInput from './HabitInput.svelte'
 
+  export let postVane: (title: string) => Promise<void>
+
 </script>
 
 <div>
@@ -17,5 +19,5 @@
       <figcaption class="text-right">&mdash; Buddha</figcaption>
     </figure>
   </header>
-  <HabitInput />
+  <HabitInput {postVane} />
 </div>

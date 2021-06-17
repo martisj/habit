@@ -1,42 +1,67 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
   import Habits from './components/Habits.svelte'
   import AppHeader from './components/AppHeader.svelte'
+  import { onMount } from 'svelte'
   import type { Habit } from './types/Habit'
-  import type { JSONResponse } from './types/JSONResponse'
 
-  let isEditing = false
-  let vanes: Habit[]
+  let isLoading = false
+  type Endpoints = 'vane' | 'vanes'
+  const apiUrl = (url: Endpoints) => `http://localhost:3001/${url}`
 
-  onMount(async function fetchVanes() {
-    const response = await fetch('http://localhost:3001/vanes', {
-      method: 'GET',
+  let vanes: Habit[] = []
+  async function fetchData() {
+    const headers = {
+      'Content-type': 'application/json',
+    }
+    const method = 'GET'
+    isLoading = true
+    const response = await fetch(apiUrl('vanes'), { method, headers })
+    const json = await response.json()
+
+    if (response.ok) {
+      vanes = json.vanes
+    }
+    isLoading = false
+  }
+
+  onMount(fetchData)
+
+  async function postVane(title: string) {
+    isLoading = true
+    const response = await fetch(apiUrl('vane'), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json;charset=utf-8' },
       mode: 'cors',
       credentials: 'include',
+      body: JSON.stringify({ title }),
     })
-    const json: JSONResponse<Habit[]> = await response.json()
     if (response.ok) {
-      if (json.vanes) {
-        vanes = json.vanes
-      }
+      await fetchData()
+    } else {
+      throw new Error('Cannot post vane')
     }
-  })
+    isLoading = false
+  }
+
+  let isEditing = false
 
 </script>
 
-{#if vanes}
-  <div class="pb-2 px-3 m-auto w-11/12 lg:w-8/12 lg:max-w-6xl">
-    <AppHeader />
-    <div class="mt-4">
-      <button on:click={() => (isEditing = !isEditing)}
-        >{isEditing ? 'Done' : 'Edit'}</button
-      >
+<div class="pb-2 px-3 m-auto w-11/12 lg:w-8/12 lg:max-w-6xl">
+  <AppHeader {postVane} />
+  <div class="mt-4">
+    <button on:click={() => (isEditing = !isEditing)}
+      >{isEditing ? 'Done' : 'Edit'}</button
+    >
+    {#if !isLoading}
       <Habits {vanes} />
-    </div>
+    {:else}
+      <span class="flex justify-center p-6 text-xl font-medium animate-pulse"
+        >Loading&hellip;</span
+      >
+    {/if}
   </div>
-{:else}
-  <div>loading...</div>
-{/if}
+</div>
 
 <style windi:preflights:global windi:safelist:global>
   :root {

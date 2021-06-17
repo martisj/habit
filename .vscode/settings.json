@@ -29,5 +29,9 @@
     "titleBar.inactiveForeground": "#e7e7e799"
   },
   "peacock.color": "#ff3d00",
-  "svelte.plugin.css.diagnostics.enable": false
+  "svelte.plugin.css.diagnostics.enable": false,
+  "editor.quickSuggestions": {
+    "string": true
+  },
+  "css.validate": false
 }

@@ -1,26 +1,10 @@
 <script lang="ts">
-  // import { fetchVanes } from '../App.svelte'
-
   let inputHabit = ''
   const clearInputHabit = (): void => {
     inputHabit = ''
   }
 
-  async function postVane(title: string) {
-    console.log(JSON.stringify({ title }))
-    const response = await fetch('http://localhost:3001/vane', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json;charset=utf-8' },
-      mode: 'cors',
-      credentials: 'include',
-      body: JSON.stringify({ title }),
-    })
-    if (response.ok) {
-      // fetchVanes()
-    } else {
-      throw new Error('Cannot post vane')
-    }
-  }
+  export let postVane: (title: string) => Promise<void>
 
 </script>
 

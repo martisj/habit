@@ -2,7 +2,7 @@
   import { history } from '../store/history'
   import type { DayTuple } from '../types/DayTuple'
   import type { Habit } from '../types/Habit'
-  import { isSameDay, isDoneForDay } from '../utils'
+  import { isDoneForDay } from '../utils'
 
   export let habit: Habit
   // export let isEditing: boolean
