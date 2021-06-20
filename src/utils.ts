@@ -13,6 +13,11 @@ export const calculateDaysToShow = (daysToShow: number): DayTuple[] =>
     .fill(Math.ceil(daysToShow / 2) * -1)
     .map((day, idx) => formatDdMmmArr(dayjs().add(idx + day, 'day')))
 
+export const rawCalculateDaysToShow = (daysToShow: number): Dayjs[] =>
+  Array(daysToShow + 1)
+    .fill(Math.ceil(daysToShow / 2) * -1)
+    .map((day, idx) => dayjs().add(idx + day, 'day'))
+
 export const uuid = uuidv4
 
 export const isDoneForDay = (id: string, day: any, history: any) => {

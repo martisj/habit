@@ -5,7 +5,7 @@
   import type { Habit } from './types/Habit'
 
   let isLoading = false
-  type Endpoints = 'vane' | 'vanes'
+  type Endpoints = 'vane' | 'vanes' | 'vane/log'
   const apiUrl = (url: Endpoints) => `http://localhost:3001/${url}`
   const destroyUrl = (id: string) => `${apiUrl('vane')}/${id}`
 
@@ -59,6 +59,24 @@
     }
     isLoading = false
   }
+
+  async function logVane(vaneId: string, day: string) {
+    isLoading = true
+    const response = await fetch(apiUrl('vane/log'), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json;charset=utf-8' },
+      mode: 'cors',
+      credentials: 'include',
+      body: JSON.stringify({ vaneId, day }),
+    })
+    if (response.ok) {
+      await fetchData()
+    } else {
+      throw new Error('Cannot log vane')
+    }
+    isLoading = false
+  }
+
   let isEditing = false
   const toggleIsEditing = () => (isEditing = !isEditing)
 
@@ -75,7 +93,7 @@
       >{isEditing ? '✓ Done' : '✎ Edit'}
     </button>
     {#if !isLoading}
-      <Habits {vanes} {destroyVane} {isEditing} />
+      <Habits {vanes} {destroyVane} {isEditing} {logVane} />
     {:else}
       <span class="flex justify-center p-6 text-xl font-medium animate-pulse"
         >Loading&hellip;</span

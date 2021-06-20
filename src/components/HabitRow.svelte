@@ -1,4 +1,6 @@
 <script lang="ts">
+  import type { Dayjs } from 'dayjs'
+
   import { history } from '../store/history'
   import type { DayTuple } from '../types/DayTuple'
   import type { Habit } from '../types/Habit'
@@ -8,7 +10,9 @@
   export let isEditing: boolean
   export let today: DayTuple
   export let days: DayTuple[]
+  export let rawDays: Dayjs[]
   export let destroyVane: (id: string) => void
+  export let logVane: (vaneId: string, day: string) => Promise<void>
 
 </script>
 
@@ -21,7 +25,7 @@
   {/if}
   <strong>{habit.title}</strong>
 </div>
-{#each days as day}
+{#each days as day, i}
   <div
     class="p-0 {isDoneForDay(habit._id, day, $history)
       ? 'bg-transparent'
@@ -29,7 +33,7 @@
   >
     <button
       class="text-2xl bg-transparent appearance-none border-0 w-full h-5 inline-block cursor-pointer"
-      on:click={() => history.add(habit._id, day)}
+      on:click={() => logVane(habit._id, rawDays[i].format('YYYY-MM-DD'))}
       disabled={isDoneForDay(habit._id, day, $history)}
       >{isDoneForDay(habit._id, day, $history) ? '' : '○'}</button
     >

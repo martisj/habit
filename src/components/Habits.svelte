@@ -2,15 +2,22 @@
   import dayjs from 'dayjs'
   import HabitRow from './HabitRow.svelte'
   import type { Habit } from '../types/Habit'
-  import { isSameDay, formatDdMmmArr, calculateDaysToShow } from '../utils'
+  import {
+    isSameDay,
+    formatDdMmmArr,
+    calculateDaysToShow,
+    rawCalculateDaysToShow,
+  } from '../utils'
 
   export let isEditing: boolean
   export let vanes: Habit[]
-  export let destroyVane: (id: string) => void
+  export let destroyVane: (id: string) => Promise<void>
+  export let logVane: (vaneId: string, day: string) => Promise<void>
 
   const daysToShow = 4
   const today = formatDdMmmArr(dayjs())
   const days = calculateDaysToShow(daysToShow)
+  const rawDays = rawCalculateDaysToShow(daysToShow)
   console.log(days.length + 1)
 
 </script>
@@ -27,7 +34,15 @@
   {/each}
 
   {#each vanes as habit}
-    <HabitRow {habit} {today} {days} {isEditing} {destroyVane} />
+    <HabitRow
+      {habit}
+      {today}
+      {days}
+      {rawDays}
+      {isEditing}
+      {logVane}
+      {destroyVane}
+    />
   {:else}
     <div
       colspan={days.length + 2}
