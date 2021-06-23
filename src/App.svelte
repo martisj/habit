@@ -5,7 +5,7 @@
   import type { Habit } from './types/Habit'
 
   let isLoading = false
-  type Endpoints = 'vane' | 'vanes' | 'vane/log'
+  type Endpoints = 'vane' | 'vanes' | 'vane/log' | 'vane/unlog'
   const apiUrl = (url: Endpoints) => `http://localhost:3001/${url}`
   const destroyUrl = (id: string) => `${apiUrl('vane')}/${id}`
 
@@ -77,12 +77,28 @@
     isLoading = false
   }
 
+  async function unlogVane(vaneId: string, day: string) {
+    isLoading = true
+    const response = await fetch(apiUrl('vane/unlog'), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json;charset=utf-8' },
+      mode: 'cors',
+      credentials: 'include',
+      body: JSON.stringify({ vaneId, day }),
+    })
+    if (response.ok) {
+      await fetchData()
+    } else {
+      throw new Error('Cannot log vane')
+    }
+    isLoading = false
+  }
+
   let isEditing = false
   const toggleIsEditing = () => (isEditing = !isEditing)
-
 </script>
 
-<div class="pb-2 px-3 m-auto w-11/12 lg:w-8/12 lg:max-w-6xl">
+<div class="pb-2 px-3 m-auto w-full lg:w-8/12 lg:max-w-6xl">
   <AppHeader {postVane} />
   <div class="mt-4">
     <button
@@ -93,7 +109,7 @@
       >{isEditing ? '✓ Done' : '✎ Edit'}
     </button>
     {#if !isLoading}
-      <Habits {vanes} {destroyVane} {isEditing} {logVane} />
+      <Habits {vanes} {destroyVane} {isEditing} {logVane} {unlogVane} />
     {:else}
       <span class="flex justify-center p-6 text-xl font-medium animate-pulse"
         >Loading&hellip;</span
@@ -129,5 +145,4 @@
     background-color: var(--cSepia);
     color: var(--cBlack);
   }
-
 </style>

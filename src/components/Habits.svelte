@@ -13,12 +13,12 @@
   export let vanes: Habit[]
   export let destroyVane: (id: string) => Promise<void>
   export let logVane: (vaneId: string, day: string) => Promise<void>
+  export let unlogVane: (vaneId: string, day: string) => Promise<void>
 
   const daysToShow = 4
   const today = formatDdMmmArr(dayjs())
   const days = calculateDaysToShow(daysToShow)
   const rawDays = rawCalculateDaysToShow(daysToShow)
-  console.log(days.length + 1)
 </script>
 
 <div class="grid grid-cols-6 text-sm bg-pixie">
@@ -39,6 +39,7 @@
       days={rawDays}
       {isEditing}
       {logVane}
+      {unlogVane}
       {destroyVane}
     />
   {:else}
