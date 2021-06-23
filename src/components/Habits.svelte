@@ -19,7 +19,6 @@
   const days = calculateDaysToShow(daysToShow)
   const rawDays = rawCalculateDaysToShow(daysToShow)
   console.log(days.length + 1)
-
 </script>
 
 <div class="grid grid-cols-6 text-sm bg-pixie">
@@ -37,8 +36,7 @@
     <HabitRow
       {habit}
       {today}
-      {days}
-      {rawDays}
+      days={rawDays}
       {isEditing}
       {logVane}
       {destroyVane}

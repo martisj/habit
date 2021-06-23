@@ -9,11 +9,9 @@
   export let habit: Habit
   export let isEditing: boolean
   export let today: DayTuple
-  export let days: DayTuple[]
-  export let rawDays: Dayjs[]
+  export let days: Dayjs[]
   export let destroyVane: (id: string) => void
   export let logVane: (vaneId: string, day: string) => Promise<void>
-
 </script>
 
 <div class="py-3 px-1 text-right bg-sepia relative">
@@ -25,17 +23,13 @@
   {/if}
   <strong>{habit.title}</strong>
 </div>
-{#each days as day, i}
-  <div
-    class="p-0 {isDoneForDay(habit._id, day, $history)
-      ? 'bg-transparent'
-      : 'bg-sepia'}"
-  >
+{#each days as day}
+  <div class="p-0 {isDoneForDay(habit, day) ? 'bg-transparent' : 'bg-sepia'}">
     <button
       class="text-2xl bg-transparent appearance-none border-0 w-full h-5 inline-block cursor-pointer"
-      on:click={() => logVane(habit._id, rawDays[i].format('YYYY-MM-DD'))}
-      disabled={isDoneForDay(habit._id, day, $history)}
-      >{isDoneForDay(habit._id, day, $history) ? '' : '○'}</button
+      on:click={() => logVane(habit._id, day.format('YYYY-MM-DD'))}
+      disabled={isDoneForDay(habit, day)}
+      >{isDoneForDay(habit, day) ? '' : '○'}</button
     >
   </div>
 {/each}
