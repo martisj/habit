@@ -43,4 +43,4 @@ type MonthShort =
   | 'Oct'
   | 'Nov'
   | 'Dec'
-export type DayTuple = [DayNumber, MonthShort]
+export type DayTuple = [string, string]

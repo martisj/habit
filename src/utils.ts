@@ -6,13 +6,16 @@ import type { DayTuple } from './types/DayTuple'
 import type { Habit } from './types/Habit'
 
 export const isSameDay = (a: DayTuple, b: DayTuple) => a.join('') === b.join('')
-export const formatDdMmmArr = (day: Dayjs): DayTuple =>
-  day.format('DD MMM').split(' ')
+
+export const toDayTuple = (day: Dayjs): DayTuple => [
+  day.format('DD'),
+  day.format('MMM'),
+]
 
 export const calculateDaysToShow = (daysToShow: number): DayTuple[] =>
   Array(daysToShow + 1)
     .fill(Math.ceil(daysToShow / 2) * -1)
-    .map((day, idx) => formatDdMmmArr(dayjs().add(idx + day, 'day')))
+    .map((day, idx) => toDayTuple(dayjs().add(idx + day, 'day')))
 
 export const rawCalculateDaysToShow = (daysToShow: number): Dayjs[] =>
   Array(daysToShow + 1)

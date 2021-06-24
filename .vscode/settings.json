@@ -33,5 +33,8 @@
   "editor.quickSuggestions": {
     "string": true
   },
-  "css.validate": false
+  "css.validate": false,
+  "windicss.includeLanguages": {
+    "svelte": "html"
+  }
 }

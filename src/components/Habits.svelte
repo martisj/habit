@@ -1,10 +1,11 @@
 <script lang="ts">
   import dayjs from 'dayjs'
-  import HabitRow from './HabitRow.svelte'
+  import HabitCol from './HabitCol.svelte'
+  import Box from './Box.svelte'
   import type { Habit } from '../types/Habit'
   import {
     isSameDay,
-    formatDdMmmArr,
+    toDayTuple,
     calculateDaysToShow,
     rawCalculateDaysToShow,
   } from '../utils'
@@ -15,25 +16,26 @@
   export let logVane: (vaneId: string, day: string) => Promise<void>
   export let unlogVane: (vaneId: string, day: string) => Promise<void>
 
-  const daysToShow = 4
-  const today = formatDdMmmArr(dayjs())
+  const daysToShow = 10
+  const today = toDayTuple(dayjs())
   const days = calculateDaysToShow(daysToShow)
   const rawDays = rawCalculateDaysToShow(daysToShow)
 </script>
 
-<div class="grid grid-cols-6 text-sm bg-pixie">
-  <div class="bg-sepia" />
-  {#each days as day}
-    <div
-      class="text-center px-3 py-2 bg-sepia"
-      class:bg-white={isSameDay(day, today)}
-    >
-      <span class="block font-bold text-lg">{day[0]}</span><span>{day[1]}</span>
+<div class="flex text-sm">
+  <div class="flex flex-col">
+    <div class="bg-sepia">
+      <span class="text-lg uppercase text-right">{days[0][1]}</span>
     </div>
-  {/each}
+    {#each days as day}
+      <Box bg={isSameDay(today, day) ? 'bg-orange-400' : undefined}>
+        <span class="font-bold text-lg">{day[0]}</span>
+      </Box>
+    {/each}
+  </div>
 
   {#each vanes as habit}
-    <HabitRow
+    <HabitCol
       {habit}
       {today}
       days={rawDays}
