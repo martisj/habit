@@ -17,14 +17,18 @@
 </script>
 
 <div class="flex flex-col">
-  <div class="py-3 px-1 relative whitespace-nowrap border-b-1 border-black">
+  <div
+    class="bg-green-400 h-24 relative whitespace-nowrap border-b-1 border-black"
+  >
     {#if isEditing}
       <button
         class="px-4 appearance-none absolute left-0 top-0 bottom-0 text-xl text-rose-500 font-medium leading-none"
         on:click={() => destroyVane(habit._id)}>&times;</button
       >
     {/if}
-    <div class="transform -rotate-90 block origin-top-left center">
+    <div
+      class="bg-red-400 transform -rotate-45 block origin-bottom-left translate-x-1/2 w-16"
+    >
       <strong class="font-medium text-base">{habit.title}</strong>
     </div>
   </div>
